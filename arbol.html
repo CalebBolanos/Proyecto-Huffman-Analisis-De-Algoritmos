@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+                 initial-scale=1.0">
+    <title>GeeksforGeeks</title>
+</head>
+
+<body>
+    <div id="animacion"></div>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js">
+    </script>
+    <script>
+        let svg = d3.select("#animacion").append("svg")
+            .attr("width", 500)
+            .attr("height", 300);
+
+        function dibujarCirculo(index) {
+            svg.append('circle')
+                .attr('cx', 150 * index)
+                .attr('cy', 100)
+                .attr('r', 50)
+                .attr('stroke', 'black')
+                .attr('fill', '#69a3b2');
+            console.log(index)
+        }
+
+
+        for (let index = 1; index <= 3; index++) {
+            dibujarCirculo(index);
+        }
+    </script>
+</body>
+
+</html>

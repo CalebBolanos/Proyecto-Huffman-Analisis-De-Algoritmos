@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/quicksand.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="librerias/vue.js"></script>
+    <script src="librerias/vuetify.js"></script>
+    <style>
+        .v-application {
+            font-family: "Quicksand";
+        }
+        
+        .v-app-bar-title__content {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app>
+                <v-app-bar-title>Codificación de Huffman</v-app-bar-title>
+                <v-spacer></v-spacer>
+            </v-app-bar>
+            <v-main>
+                <br><br>
+                <v-container>
+                    <v-textarea outlined label="Escribe el mensaje que deseas codificar" v-model="cadena"></v-textarea>
+                    <template>
+                        <v-btn block color="primary">
+                          Construir árbol
+                        </v-btn>
+                    </template> {{cadena}}
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: () => ({
+                cadena: '',
+            }),
+            methods: {
+
+            },
+            computed: {
+
+            },
+            vuetify: new Vuetify(),
+        })
+    </script>
+</body>
+
+</html>
