@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/cytoscape-automove@1.10.2/cytoscape-automove.min.js"></script>
     <style>
         #cy {
-            width: 800px;
+            width: 100%;
             height: 800px;
             display: block;
         }
@@ -75,9 +75,9 @@
         let charfreq = [3, 6, 2, 2, 2, 2, 1];
         **/
 
-        let n = 7;
-        let charArray = ['_', 'a', 'i', 'l', 'n', 't', 'v'];
-        let charfreq = [3, 6, 2, 2, 2, 2, 1];
+        let n = 6;
+        let charArray = ['f', 'e', 'c', 'b', 'd', 'a'];
+        let charfreq = [5, 9, 12, 13, 16, 45];
 
         // creating a priority queue colaPrioridad.
         // makes a min-priority queue(min-heap).
@@ -200,7 +200,7 @@
                             let position = {};
                             position.x = nodo.position('x');
                             position.y = nodo.position('y') + 200;
-                            i += 50;
+                            i = nodo.position('x');
                             return position;
                         }
                     }).run();
@@ -208,19 +208,16 @@
                 }
             }, 1000);
 
-            console.log(posicionOriginal);
-
 
             //obtiene el segundo nodo
             let nodo2 = cy.getElementById(idNodoDos);
-            i = 50;
             setTimeout(function() {
                 if (cy.$(`.${idNodoDos}`).length == 0) { //si el nodo es hoja se ejecuta la animacion de hoja
                     console.log('hoja');
                     nodo2.addClass(idNuevoArbol);
                     nodo2.animate({
                         position: {
-                            x: nodo2.position('x'),
+                            x: nodo1.position('x') + 100,
                             y: 400
                         },
                         style: {
@@ -232,6 +229,7 @@
 
                 } else { //en caso contrario, se ejecuta la animacion de arbol
                     console.log('arbol');
+                    console.log(nodo1.position('x'));
                     let arbol = cy.$(`.${idNodoDos}`);
                     arbol.forEach((nodo) => nodo.addClass(idNuevoArbol)); //actualizamos la nueva clase para que podamos moverlo
                     arbol.layout({
@@ -240,7 +238,7 @@
                         fit: false,
                         transform: (nodo) => {
                             let position = {};
-                            position.x = nodo.position('x');
+                            position.x = nodo.position('x') + nodo1.position('x'); //poner a la izquierda del arbol 1
                             position.y = nodo.position('y') + 200;
                             i += 70;
                             return position;
@@ -248,7 +246,7 @@
                     }).run();
 
                 }
-            }, 1000);
+            }, 2000);
 
 
 
@@ -261,14 +259,14 @@
                         id: idNuevoArbol,
                     },
                     position: {
-                        x: nodo1.position('x') + posicionNuevoNodo,
+                        x: (nodo1.position('x') + nodo2.position('x')) / 2,
                         y: nodo1.position('y') - 100
                     }
                 }).addClass(idNuevoArbol).css({
                     'label': `(${sumaFrecuencia})`
                 });
-                !esHoja ? posicionNuevoNodo += 50 : posicionNuevoNodo;
-            }, 2000);
+
+            }, 3000);
 
 
 
@@ -282,7 +280,7 @@
                         target: idNodoUno
                     }
                 });
-            }, 3000);
+            }, 4000);
 
 
             //agregamos derecha
@@ -294,7 +292,7 @@
                         target: idNodoDos
                     }
                 });
-            }, 4000);
+            }, 5000);
 
 
 
@@ -313,7 +311,7 @@
                         return position;
                     }
                 }).run();
-            }, 5000);
+            }, 6000);
         }
 
 
@@ -336,14 +334,14 @@
                 colaPrioridad.push(nuevoArbol);
 
                 animarWhile(nodoUno.idCy, nodoDos.idCy, nuevoArbol.idCy, nuevoArbol.frecuencia);
-                await sleep(5000);
+                await sleep(6000);
                 colaPrioridad.sort(function(a, b) {
                     return a.frecuencia - b.frecuencia;
                 });
                 iteraciones++;
-                /*cy.fit();
-                cy.center();*/
+
             }
+
         }
 
         whileHuffman(colaPrioridad);
