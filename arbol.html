@@ -64,8 +64,19 @@
 
         // main function  
         // number of characters.
+        /**
+        
+        let n = 6;
+        let charArray = ['f', 'e', 'c', 'b', 'd', 'a'];
+        let charfreq = [5, 9, 12, 13, 16, 46];
+
         let n = 7;
-        let charArray = ['j', 'a', 'i', 'l', 'n', 't', 'v'];
+        let charArray = ['_', 'a', 'i', 'l', 'n', 't', 'v'];
+        let charfreq = [3, 6, 2, 2, 2, 2, 1];
+        **/
+
+        let n = 7;
+        let charArray = ['_', 'a', 'i', 'l', 'n', 't', 'v'];
         let charfreq = [3, 6, 2, 2, 2, 2, 1];
 
         // creating a priority queue colaPrioridad.
@@ -153,39 +164,94 @@
             i++;
         });
 
+        let posicionNuevoNodo = 50;
+
         function animarWhile(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia) {
             //obtiene un el primer nodo
             let nodo1 = cy.getElementById(idNodoUno);
+            let posicionOriginal = nodo1.position('x');
+            let i = 100;
+            let esHoja = cy.$(`.${idNodoUno}`).length == 0;
+            setTimeout(function() {
+                if (esHoja) { //si el nodo es hoja se ejecuta la animacion de hoja
+                    console.log('hoja');
+                    nodo1.addClass(idNuevoArbol);
+                    nodo1.animate({
+                        position: {
+                            x: nodo1.position('x'),
+                            y: 400
+                        },
+                        style: {
+                            lineColor: 'pink'
+                        }
+                    }, {
+                        duration: 1000,
+                    });
 
-            nodo1.addClass(idNuevoArbol);
-            nodo1.animate({
-                position: {
-                    x: 100,
-                    y: 400
-                },
-                style: {
-                    lineColor: 'pink'
+                } else { //en caso contrario, se ejecuta la animacion de arbol
+                    console.log('arbol');
+                    let arbol = cy.$(`.${idNodoUno}`);
+                    arbol.forEach((nodo) => nodo.addClass(idNuevoArbol)); //actualizamos la nueva clase para que podamos moverlo
+                    arbol.layout({
+                        name: 'preset',
+                        animate: true,
+                        fit: false,
+                        transform: (nodo) => {
+                            let position = {};
+                            position.x = nodo.position('x');
+                            position.y = nodo.position('y') + 200;
+                            i += 50;
+                            return position;
+                        }
+                    }).run();
+
                 }
-            }, {
-                duration: 1000,
-            });
+            }, 1000);
+
+            console.log(posicionOriginal);
+
 
             //obtiene el segundo nodo
             let nodo2 = cy.getElementById(idNodoDos);
+            i = 50;
             setTimeout(function() {
-                nodo2.addClass(idNuevoArbol);
-                nodo2.animate({
-                    position: {
-                        x: 200,
-                        y: 400
-                    },
-                    style: {
-                        lineColor: 'pink'
-                    }
-                }, {
-                    duration: 1000,
-                });
+                if (cy.$(`.${idNodoDos}`).length == 0) { //si el nodo es hoja se ejecuta la animacion de hoja
+                    console.log('hoja');
+                    nodo2.addClass(idNuevoArbol);
+                    nodo2.animate({
+                        position: {
+                            x: nodo2.position('x'),
+                            y: 400
+                        },
+                        style: {
+                            lineColor: 'pink'
+                        }
+                    }, {
+                        duration: 1000,
+                    });
+
+                } else { //en caso contrario, se ejecuta la animacion de arbol
+                    console.log('arbol');
+                    let arbol = cy.$(`.${idNodoDos}`);
+                    arbol.forEach((nodo) => nodo.addClass(idNuevoArbol)); //actualizamos la nueva clase para que podamos moverlo
+                    arbol.layout({
+                        name: 'preset',
+                        animate: true,
+                        fit: false,
+                        transform: (nodo) => {
+                            let position = {};
+                            position.x = nodo.position('x');
+                            position.y = nodo.position('y') + 200;
+                            i += 70;
+                            return position;
+                        }
+                    }).run();
+
+                }
             }, 1000);
+
+
+
 
 
             //agregamos nodo de huffman
@@ -195,13 +261,16 @@
                         id: idNuevoArbol,
                     },
                     position: {
-                        x: 150,
-                        y: 300
+                        x: nodo1.position('x') + posicionNuevoNodo,
+                        y: nodo1.position('y') - 100
                     }
                 }).addClass(idNuevoArbol).css({
                     'label': `(${sumaFrecuencia})`
                 });
+                !esHoja ? posicionNuevoNodo += 50 : posicionNuevoNodo;
             }, 2000);
+
+
 
 
             //agregamos izquierda
@@ -238,7 +307,8 @@
                     fit: false,
                     transform: (nodo) => {
                         let position = {};
-                        position.x = nodo.position('x') + (100 * colaPrioridad.length);
+                        position.x = nodo.position('x'); //colaPrioridad.length 
+
                         position.y = nodo.position('y') - 100;
                         return position;
                     }
@@ -248,6 +318,7 @@
 
 
         async function whileHuffman(colaPrioridad) {
+            let iteraciones = 0;
             while (colaPrioridad.length > 1) {
                 let nodoUno = colaPrioridad.shift();
                 let nodoDos = colaPrioridad.shift();
@@ -260,7 +331,7 @@
                 nuevoArbol.izquierda = nodoUno;
                 nuevoArbol.derecha = nodoDos;
 
-                nuevoArbol.idCy = `${nodoUno.frecuencia}-${nodoDos.frecuencia}`
+                nuevoArbol.idCy = `it-${iteraciones}-${nodoUno.frecuencia}-${nodoDos.frecuencia}`
 
                 colaPrioridad.push(nuevoArbol);
 
@@ -269,6 +340,9 @@
                 colaPrioridad.sort(function(a, b) {
                     return a.frecuencia - b.frecuencia;
                 });
+                iteraciones++;
+                /*cy.fit();
+                cy.center();*/
             }
         }
 
