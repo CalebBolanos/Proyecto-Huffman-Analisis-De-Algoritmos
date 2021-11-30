@@ -6,8 +6,11 @@
     <link href="css/vuetify.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/quicksand.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="https://unpkg.com/cytoscape@3.2.22/dist/cytoscape.min.js"></script>
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
+    <script src="componentes/VisualizadorHuffman.js"></script>
+
     <style>
         .v-application {
             font-family: "Quicksand";
@@ -22,36 +25,45 @@
 <body>
     <div id="app">
         <v-app>
-            <v-app-bar app>
-                <v-app-bar-title>Codificación de Huffman</v-app-bar-title>
+            <v-app-bar app style="
+                background-color: rgba(255, 255, 255, 0.5) !important;
+                backdrop-filter: saturate(180%) blur(20px) !important;
+              ">
+                <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
                 <v-spacer></v-spacer>
+
+                <v-menu left bottom offset-y rounded="lg">
+                    <template v-slot:activator="{ on, attrs }">
+                  <v-btn icon v-bind="attrs" v-on="on">
+                    <v-avatar
+                      size="32"
+                    >
+                      <v-icon> mdi-clipboard-list </v-icon>
+                    </v-avatar>
+                  </v-btn>
+                </template>
+                </v-menu>
             </v-app-bar>
-            <v-main>
-                <br><br>
+            <v-main class="grey lighten-2">
                 <v-container>
-                    <v-textarea outlined label="Escribe el mensaje que deseas codificar" v-model="cadena"></v-textarea>
-                    <template>
-                        <v-btn block color="primary">
-                          Construir árbol
-                        </v-btn>
-                    </template> {{cadena}}
+                    <v-row>
+
+                    </v-row>
+                    <visualizador-huffman />
                 </v-container>
             </v-main>
         </v-app>
     </div>
 
     <script>
+        Vue.component("visualizador-huffman", VisualizadorHuffman);
         new Vue({
             el: '#app',
             data: () => ({
                 cadena: '',
             }),
-            methods: {
-
-            },
-            computed: {
-
-            },
+            methods: {},
+            computed: {},
             vuetify: new Vuetify(),
         })
     </script>

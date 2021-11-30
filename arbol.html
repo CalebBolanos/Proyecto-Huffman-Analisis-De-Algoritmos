@@ -21,6 +21,10 @@
 <body>
     <div id="cy"></div>
     <script>
+        /**
+         * Esta archivo html contiene la funcionalidad de la animacion, aun esta todo desordenado, pero se describiran las funciones que se hacen
+         * **/
+
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms))
         }
@@ -106,8 +110,6 @@
             return a.frecuencia - b.frecuencia;
         });
 
-
-
         let cy = cytoscape({
 
             container: document.getElementById('cy'), // container to render in
@@ -124,7 +126,9 @@
                         'text-wrap': 'wrap',
                         'text-halign': 'center',
                         'text-valign': 'center',
-                        'color': '#fff'
+                        'color': '#fff',
+                        'width': '50',
+                        'height': '50'
                     }
                 },
 
@@ -339,16 +343,11 @@
                     return a.frecuencia - b.frecuencia;
                 });
                 iteraciones++;
-
             }
 
         }
 
         whileHuffman(colaPrioridad);
-
-
-
-        // This code is contributed by avanitrachhadiya2155
     </script>
 </body>
 
