@@ -48,10 +48,10 @@ const VisualizadorHuffman = {
     </v-row>
     `,
     data: () => ({
-        cadena: "",
-        n: 6,
-        charArray: ['f', 'e', 'c', 'b', 'd', 'a'],
-        charFreq: [5, 9, 12, 13, 16, 45],
+        cadena: "ACCCAABABAABABACBCBBACADDDDDFDCACAEEEEECBCAFFCACAAAAAEEEEDADADADDAAABDAAFFDADBDBDAAABAABAAAAAAAAAAAA",
+        n: 0,
+        charArray: [],
+        charFreq: [],
         colaPrioridad: [],
         cy: undefined,
     }),
