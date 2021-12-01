@@ -237,6 +237,8 @@ while (colaPrioridad.length > 1) {
                 colaPrioridad.sort(function(a, b) {
                     return a.frecuencia - b.frecuencia;
                 });
+                //acomodar nodos
+                //this.acomodarNodos(colaPrioridad, this.cy);
                 iteraciones++;
             }
             this.editor.gotoLine(2);
@@ -245,9 +247,29 @@ while (colaPrioridad.length > 1) {
             this.cy.fit();
         },
 
+        acomodarNodos(colaPrioridad, cy) {
+            let i = 1;
+            colaPrioridad.forEach((nodo) => {
+                let nodox = cy.getElementById(nodo.idCy);
+                if (cy.$(`.${nodo.idCy}`).length == 0) {
+                    nodox.position('x', 100 * i);
+
+                } else {
+                    let arbol = cy.$(`.${nodo.idCy}`);
+                    arbol.positions((nodo, x) => {
+                        let position = {};
+                        position.x = nodo == nodox ? (100 * i) : nodo.position('x'); //colaPrioridad.length 
+                        position.y = nodo.position('y');
+                        return position;
+                    });
+                }
+                i++;
+            })
+        },
+
         animarHuffman(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia, cy, editor) {
 
-            //obtiene un el primer nodo
+            //obtiene un el primer nodo nodo2-nodo1
 
 
             editor.gotoLine(2);
@@ -388,6 +410,12 @@ while (colaPrioridad.length > 1) {
             setTimeout(function() {
                 editor.gotoLine(13);
                 let arbol = cy.$(`.${idNuevoArbol}`);
+                let raiz = cy.getElementById(idNuevoArbol);
+                cy.automove({
+                    nodesMatching: arbol,
+                    reposition: 'drag',
+                    dragWith: raiz
+                })
                 arbol.layout({
                     name: 'preset',
                     animate: true,
