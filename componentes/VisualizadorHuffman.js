@@ -12,7 +12,7 @@ const VisualizadorHuffman = {
     <v-col cols="12" sm="12">
       <v-card rounded="lg" elevation="0">
         <v-card-title class="align-start">
-          <span>Si</span>
+          <span>Visualizar árbol de codificación óptimo</span>
           <v-spacer></v-spacer>
           <v-btn icon small class="mt-n2 me-n3">
             <v-icon size="22"> mdi-clipboard-list </v-icon>
@@ -26,21 +26,36 @@ const VisualizadorHuffman = {
             v-model="cadena"
           ></v-textarea>
           <v-btn block color="primary" @click="generarNodos()"> Construir árbol </v-btn>
-          {{ n }}<br>{{ charArray }}<br>{{ charFreq }}<br>{{ colaPrioridad }}
+          
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="6" lg="4">
+    <v-col cols="12" sm="12" md="6" lg="6">
       <v-card rounded="lg" elevation="0" min-height="80vh">
         <v-card-title class="align-start">
-          <span>Si</span>
+          <span>Algoritmo de Huffman (JavaScript)</span>
           <v-spacer></v-spacer>
         </v-card-title>
-    
-        <v-card-text> </v-card-text>
+        <v-card-text>
+            <div id="editor" ref="editor" style="width: 100%; height: 60vh; display: block">
+while (colaPrioridad.length > 1) {
+  let nodoUno = colaPrioridad.shift();
+  let nodoDos = colaPrioridad.shift();
+
+  let nuevoArbol = new NodoHuffman();
+  nuevoArbol.frecuencia = nodoUno.frecuencia + nodoDos.frecuencia;
+  nuevoArbol.caracter = undefined;
+   
+  nuevoArbol.izquierda = nodoUno;
+  nuevoArbol.derecha = nodoDos;
+
+  colaPrioridad.push(nuevoArbol);
+}
+            </div>
+        </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="6" lg="8">
+    <v-col cols="12" sm="12" md="6" lg="6">
       <v-card rounded="lg" elevation="0" min-height="80vh">
         <div id="cy" ref="cy" style="width: 100%; height: 80vh; display: block"></div>
       </v-card>
@@ -54,6 +69,7 @@ const VisualizadorHuffman = {
         charFreq: [],
         colaPrioridad: [],
         cy: undefined,
+        editor: undefined,
     }),
 
     mounted() {
@@ -96,7 +112,19 @@ const VisualizadorHuffman = {
             },
         });
         this.cy = cytoscape;
-        //this.generarNodos()
+
+        let aceEditor = window.ace.edit(this.$refs.editor, {
+            mode: "ace/mode/javascript",
+            selectionStyle: "text"
+        });
+        this.editor = aceEditor;
+        this.editor.setOptions({
+            readOnly: true,
+            cursorStyle: "slim",
+            theme: "ace/theme/dracula",
+            //hScrollBarAlwaysVisible: false,
+            fontSize: 11.7
+        })
     },
 
     created() {
@@ -143,7 +171,9 @@ const VisualizadorHuffman = {
             this.charArray = []
             this.charFreq = []
             this.colaPrioridad = []
+
             this.obtenerFrecuencias(this.cadena)
+
             for (let i = 0; i < this.n; i++) {
                 let hn = new NodoHuffman();
 
@@ -179,7 +209,8 @@ const VisualizadorHuffman = {
                 });
                 i++;
             });
-            this.cy.zoom(0.7);
+            this.cy.reset();
+            this.cy.zoom(0.7)
             this.AlgoritmoHuffman(this.colaPrioridad);
         },
 
@@ -201,25 +232,31 @@ const VisualizadorHuffman = {
 
                 colaPrioridad.push(nuevoArbol);
 
-                this.animarHuffman(nodoUno.idCy, nodoDos.idCy, nuevoArbol.idCy, nuevoArbol.frecuencia, this.cy);
-                await this.sleep(6000);
+                this.animarHuffman(nodoUno.idCy, nodoDos.idCy, nuevoArbol.idCy, nuevoArbol.frecuencia, this.cy, this.editor);
+                await this.sleep(7000);
                 colaPrioridad.sort(function(a, b) {
                     return a.frecuencia - b.frecuencia;
                 });
                 iteraciones++;
             }
+            this.editor.gotoLine(2);
             await this.sleep(1000);
             this.cy.center();
             this.cy.fit();
         },
 
-        animarHuffman(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia, cy) {
+        animarHuffman(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia, cy, editor) {
+
             //obtiene un el primer nodo
+
+
+            editor.gotoLine(2);
             let nodo1 = cy.getElementById(idNodoUno);
             let posicionOriginal = nodo1.position('x');
             let i = 100;
             let esHoja = cy.$(`.${idNodoUno}`).length == 0;
             setTimeout(function() {
+                editor.gotoLine(3);
                 if (esHoja) { //si el nodo es hoja se ejecuta la animacion de hoja
                     console.log('hoja');
                     nodo1.addClass(idNuevoArbol);
@@ -259,6 +296,7 @@ const VisualizadorHuffman = {
             //obtiene el segundo nodo
             let nodo2 = cy.getElementById(idNodoDos);
             setTimeout(function() {
+                editor.gotoLine(4);
                 if (cy.$(`.${idNodoDos}`).length == 0) { //si el nodo es hoja se ejecuta la animacion de hoja
                     console.log('hoja');
                     nodo2.addClass(idNuevoArbol);
@@ -301,6 +339,7 @@ const VisualizadorHuffman = {
 
             //agregamos nodo de huffman
             setTimeout(function() {
+                editor.gotoLine(6);
                 cy.add({
                     data: {
                         id: idNuevoArbol,
@@ -312,7 +351,7 @@ const VisualizadorHuffman = {
                 }).addClass(idNuevoArbol).css({
                     'label': `(${sumaFrecuencia})`
                 });
-
+                //editor.gotoLine(7);
             }, 3000);
 
 
@@ -320,6 +359,7 @@ const VisualizadorHuffman = {
 
             //agregamos izquierda
             setTimeout(function() {
+                editor.gotoLine(10);
                 cy.add({
                     data: {
                         id: `.${idNuevoArbol}-izq`,
@@ -332,6 +372,7 @@ const VisualizadorHuffman = {
 
             //agregamos derecha
             setTimeout(function() {
+                editor.gotoLine(11);
                 cy.add({
                     data: {
                         id: `.${idNuevoArbol}-der`,
@@ -345,6 +386,7 @@ const VisualizadorHuffman = {
 
 
             setTimeout(function() {
+                editor.gotoLine(13);
                 let arbol = cy.$(`.${idNuevoArbol}`);
                 arbol.layout({
                     name: 'preset',
