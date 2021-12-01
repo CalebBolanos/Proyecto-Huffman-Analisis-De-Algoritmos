@@ -26,7 +26,7 @@ const VisualizadorHuffman = {
             v-model="cadena"
           ></v-textarea>
           <v-btn block color="primary" @click="generarNodos()"> Construir árbol </v-btn>
-          {{ cadena }}
+          {{ n }}<br>{{ charArray }}<br>{{ charFreq }}<br>{{ colaPrioridad }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -108,7 +108,42 @@ const VisualizadorHuffman = {
             return new Promise((resolve) => setTimeout(resolve, ms));
         },
 
+        obtenerFrecuencias(text) {
+            /*
+                text : the input file data as continuous string
+                operation : this function should calculate the frequency of each character in the input file
+                return type : it returns a map {[char] -> node}
+            */
+
+
+            let freq = {};
+
+            for (let i = 0; i < text.length; i++) {
+                if (freq[text[i]]) {
+                    //freq[text[i]].symbol = text[i];
+                    freq[text[i]].frequency++;
+                } else {
+                    freq[text[i]] = {};
+                    freq[text[i]].symbol = text[i];
+                    freq[text[i]].frequency = 1;
+                }
+            }
+            console.log(Object.keys(freq))
+
+            for (const [key, value] of Object.entries(freq)) {
+                this.charArray.push(value.symbol);
+                this.charFreq.push(value.frequency);
+            }
+            this.n = this.charArray.length
+
+        },
+
         generarNodos() {
+            this.cy.elements().remove()
+            this.charArray = []
+            this.charFreq = []
+            this.colaPrioridad = []
+            this.obtenerFrecuencias(this.cadena)
             for (let i = 0; i < this.n; i++) {
                 let hn = new NodoHuffman();
 
@@ -144,6 +179,7 @@ const VisualizadorHuffman = {
                 });
                 i++;
             });
+            this.cy.zoom(0.7);
             this.AlgoritmoHuffman(this.colaPrioridad);
         },
 
@@ -172,7 +208,9 @@ const VisualizadorHuffman = {
                 });
                 iteraciones++;
             }
+            await this.sleep(1000);
             this.cy.center();
+            this.cy.fit();
         },
 
         animarHuffman(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia, cy) {
@@ -322,7 +360,6 @@ const VisualizadorHuffman = {
                 }).run();
             }, 6000);
         }
-
 
 
 
