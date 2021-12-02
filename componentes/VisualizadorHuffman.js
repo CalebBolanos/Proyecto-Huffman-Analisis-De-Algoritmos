@@ -107,8 +107,7 @@ while (colaPrioridad.length > 1) {
             ],
 
             layout: {
-                name: "grid",
-                rows: 1,
+                name: "dagre",
             },
         });
         this.cy = cytoscape;
@@ -244,60 +243,57 @@ while (colaPrioridad.length > 1) {
             }
             this.editor.gotoLine(2);
             await this.sleep(1000);
+            this.cy.layout({ name: 'dagre' }).run();
             this.cy.center();
             this.cy.fit();
-            //this.cy.layout({ name: 'dagre' }).run();
         },
 
         acomodarNodos(colaPrioridad, cy) {
             let i = 1;
             colaPrioridad.forEach((nodo) => {
-                let nodox = cy.getElementById(nodo.idCy);
-                if (cy.$(`.${nodo.idCy}`).length == 0) {
-                    nodox.position('x', 100 * i);
-
-                } else {
-                    nodox.trigger('mousedown', nodox.position('x'), nodox.position('y'))
-                    nodox.trigger('mouseup', (100 * i), nodox.position('y'))
-                        /** 
-                        window.jQuery('#cy').on("mousedown mouseup", (event) => {
-                            console.log('a');
-                        })
-
-                        let simularDown = window.jQuery.Event("mousedown", {
-                            pageX: nodox.position('x'),
-                            pageY: nodox.position('y')
-                        })
-
-                        window.jQuery('#cy').trigger(simularDown);
+                //let nodox = cy.getElementById(nodo.idCy);
+                //nodox.position('x', 100 * i);
 
 
-                        let simularUp = window.jQuery.Event("mouseup", {
-                            pageX: 500 * i,
-                            pageY: nodox.position('y')
-                        })
 
-                        window.jQuery('#cy').trigger(simularUp); */
+                /** 
+                window.jQuery('#cy').on("mousedown mouseup", (event) => {
+                    console.log('a');
+                })
 
-                    //nodox.position('x', 100 * i);
-                    /** 
-                    cy.get('canvas').first().trigger('mousedown', nodox.position('x'), nodox.position('y'))
-                    cy.get('canvas').first().trigger('mouseup', (100 * i), nodox.position('y')) */
+                let simularDown = window.jQuery.Event("mousedown", {
+                    pageX: nodox.position('x'),
+                    pageY: nodox.position('y')
+                })
+
+                window.jQuery('#cy').trigger(simularDown);
 
 
-                    /** 
-                    let arbol = cy.$(`.${nodo.idCy}`);
-                    arbol.positions((nodo, x) => {
-                        let position = {};
-                        console.log(nodo.id())
-                        position.x = 100 * i; //colaPrioridad.length verificar .
-                        position.y = nodo.position('y');
-                        return position;
-                    }); */
+                let simularUp = window.jQuery.Event("mouseup", {
+                    pageX: 500 * i,
+                    pageY: nodox.position('y')
+                })
 
-                }
-                i++;
+                window.jQuery('#cy').trigger(simularUp); */
+
+                //nodox.position('x', 100 * i);
+                /** 
+                cy.get('canvas').first().trigger('mousedown', nodox.position('x'), nodox.position('y'))
+                cy.get('canvas').first().trigger('mouseup', (100 * i), nodox.position('y')) */
+
+
+                /** 
+                let arbol = cy.$(`.${nodo.idCy}`);
+                arbol.positions((nodo, x) => {
+                    let position = {};
+                    console.log(nodo.id())
+                    position.x = 100 * i; //colaPrioridad.length verificar .
+                    position.y = nodo.position('y');
+                    return position;
+                }); */
+
             })
+            this.cy.layout({ name: 'dagre' }).run();
         },
 
         animarHuffman(idNodoUno, idNodoDos, idNuevoArbol, sumaFrecuencia, cy, editor) {
@@ -318,7 +314,7 @@ while (colaPrioridad.length > 1) {
                     nodo1.animate({
                         position: {
                             x: nodo1.position('x'),
-                            y: 400
+                            y: nodo1.position('y') + 200
                         },
                         style: {
                             lineColor: 'pink'
@@ -358,7 +354,7 @@ while (colaPrioridad.length > 1) {
                     nodo2.animate({
                         position: {
                             x: nodo1.position('x') + 100,
-                            y: 400
+                            y: nodo2.position('y') + 200
                         },
                         style: {
                             lineColor: 'pink'
