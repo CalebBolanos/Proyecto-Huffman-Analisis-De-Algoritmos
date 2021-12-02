@@ -180,7 +180,7 @@ while (colaPrioridad.length > 1) {
                 hn.caracter = this.charArray[i];
                 hn.frecuencia = this.charFreq[i];
 
-                hn.idCy = `${hn.caracter}-${hn.frecuencia}`;
+                hn.idCy = hn.caracter == ' ' ? `esp-${hn.frecuencia}` : `${hn.caracter}-${hn.frecuencia}`;
 
                 hn.izquierda = null;
                 hn.derecha = null;
@@ -210,7 +210,7 @@ while (colaPrioridad.length > 1) {
                 i++;
             });
             this.cy.reset();
-            this.cy.zoom(0.7)
+            //this.cy.zoom(0.7)
             this.AlgoritmoHuffman(this.colaPrioridad);
         },
 
@@ -233,18 +233,20 @@ while (colaPrioridad.length > 1) {
                 colaPrioridad.push(nuevoArbol);
 
                 this.animarHuffman(nodoUno.idCy, nodoDos.idCy, nuevoArbol.idCy, nuevoArbol.frecuencia, this.cy, this.editor);
-                await this.sleep(7000);
+                await this.sleep(8000);
                 colaPrioridad.sort(function(a, b) {
                     return a.frecuencia - b.frecuencia;
                 });
                 //acomodar nodos
-                //this.acomodarNodos(colaPrioridad, this.cy);
+                this.acomodarNodos(colaPrioridad, this.cy);
+
                 iteraciones++;
             }
             this.editor.gotoLine(2);
             await this.sleep(1000);
             this.cy.center();
             this.cy.fit();
+            //this.cy.layout({ name: 'dagre' }).run();
         },
 
         acomodarNodos(colaPrioridad, cy) {
@@ -255,13 +257,44 @@ while (colaPrioridad.length > 1) {
                     nodox.position('x', 100 * i);
 
                 } else {
+                    nodox.trigger('mousedown', nodox.position('x'), nodox.position('y'))
+                    nodox.trigger('mouseup', (100 * i), nodox.position('y'))
+                        /** 
+                        window.jQuery('#cy').on("mousedown mouseup", (event) => {
+                            console.log('a');
+                        })
+
+                        let simularDown = window.jQuery.Event("mousedown", {
+                            pageX: nodox.position('x'),
+                            pageY: nodox.position('y')
+                        })
+
+                        window.jQuery('#cy').trigger(simularDown);
+
+
+                        let simularUp = window.jQuery.Event("mouseup", {
+                            pageX: 500 * i,
+                            pageY: nodox.position('y')
+                        })
+
+                        window.jQuery('#cy').trigger(simularUp); */
+
+                    //nodox.position('x', 100 * i);
+                    /** 
+                    cy.get('canvas').first().trigger('mousedown', nodox.position('x'), nodox.position('y'))
+                    cy.get('canvas').first().trigger('mouseup', (100 * i), nodox.position('y')) */
+
+
+                    /** 
                     let arbol = cy.$(`.${nodo.idCy}`);
                     arbol.positions((nodo, x) => {
                         let position = {};
-                        position.x = nodo == nodox ? (100 * i) : nodo.position('x'); //colaPrioridad.length 
+                        console.log(nodo.id())
+                        position.x = 100 * i; //colaPrioridad.length verificar .
                         position.y = nodo.position('y');
                         return position;
-                    });
+                    }); */
+
                 }
                 i++;
             })
