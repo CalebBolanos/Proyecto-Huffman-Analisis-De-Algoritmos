@@ -1,3 +1,23 @@
+/* Variables */
+:root {
+    --stratos: #001B48;
+    --regal_blue: #02457A;
+    --bondi_blue: #018ABE;
+    --morning_glory: #97CADB;
+    --botticelli: #D6E8EE;
+}
+/* --------- */
+
+.v-main{
+    /* background: var(--botticelli); */
+    background: whitesmoke;
+}
+
+.v-card{
+    /* border: solid 1px var(--bondi_blue) !important; */
+    /* border: solid 1px whitesmoke !important; */
+}
+
 #editor{
     border-radius: 8px;
 }
