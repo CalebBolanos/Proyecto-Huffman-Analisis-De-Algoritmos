@@ -543,7 +543,15 @@ while (colaPrioridad.length > 1) {
                         source: idNuevoArbol,
                         target: idNodoUno
                     }
-                }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                }).css({
+                    label: `0`,
+                    'text-halign': 'left',
+                    'text-valign': 'center', 
+                    'text-margin-x': '-15px',
+                    'text-outline-color': '#FF5733',   
+                    'text-background-color': '#FF5733',                     
+                });
             }, 4000);
 
 
@@ -554,9 +562,17 @@ while (colaPrioridad.length > 1) {
                     data: {
                         id: `.${idNuevoArbol}-der`,
                         source: idNuevoArbol,
-                        target: idNodoDos
+                        target: idNodoDos,
                     }
-                }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                }).css({
+                    label: `1`,  
+                    'text-halign': 'left',
+                    'text-valign': 'center', 
+                    'text-margin-x': '15px',
+                    'text-outline-color': '#FF5733',   
+                    'text-background-color': '#FF5733',                                     
+                });
             }, 5000);
 
 
