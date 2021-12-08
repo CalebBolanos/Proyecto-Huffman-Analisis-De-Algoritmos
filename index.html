@@ -15,6 +15,7 @@
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
     <script src="componentes/VisualizadorHuffman.js"></script>
+    <script src="componentes/info.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
     <style>
@@ -37,6 +38,7 @@
               ">
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
                 <v-spacer></v-spacer>
+                
 
                 <v-menu left bottom offset-y rounded="lg">
                     <template v-slot:activator="{ on, attrs }">
@@ -50,11 +52,11 @@
                 </template>
                 </v-menu>
             </v-app-bar>
+            
             <v-main class="lighten-2">
                 <v-container>
-                    <v-row>
-
-                    </v-row>
+                    <v-info></v-info>
+                    <v-row></v-row>
                     <visualizador-huffman />
                 </v-container>
             </v-main>
