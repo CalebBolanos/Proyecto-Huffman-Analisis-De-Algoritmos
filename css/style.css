@@ -16,19 +16,114 @@ html {
 }
 /* --------- */
 
+/* BACKGROUND DEL MAIN */
 .v-main{
     /* background: var(--botticelli); */
-    background: whitesmoke;
+    /* background: whitesmoke; */
 }
 
-.v-card{
+/* BORDES PARA LOS BLOQUES DEL CODIFICADOR */
+.v-card{ 
     /* border: solid 1px var(--bondi_blue) !important; */
     /* border: solid 1px whitesmoke !important; */
+    border: solid 1px #cfcfcf !important;
 }
 
 #editor{
     border-radius: 8px;
 }
+
+/* BANNER SUPERIOR */
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-1{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+}
+
+.link-scroll{
+    padding-top: 30px;
+}
+
+.no-sticky{
+    position: relative !important;
+    background: white !important;
+}
+
+.sticky {
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: var(--regal_blue) !important;
+    color: whitesmoke !important;
+}   
+
+.responsive-img{
+    width: 100%;
+}
+
+.banner .container .left{
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding-right: 50px;
+    padding: 100px;
+    float: left;
+}
+
+.left h1{
+    font-size: 2rem;
+}
+
+.buttons{
+    text-align: center;
+}
+.buttons a{
+    margin: 15px;
+}
+.btn-personal-primary, .primary{
+    transition: 0.5s;
+    background: var(--bondi_blue) !important;
+    color: whitesmoke !important;
+}
+.btn-personal-primary:hover{
+    transition: 0.5s;
+    background: rgb(1, 125, 173) !important;
+    color: whitesmoke !important;
+}
+
+.banner .container .right{
+    overflow: hidden;
+    width: 50%;
+    margin: 0;
+    padding: 10px;
+    float: right;
+}
+
+/* RESPONSIVE BANNER */
+@media screen and (max-width: 768px) {
+    .flex-1{
+        text-align: center;
+    }
+    .banner .container{
+        display: block;
+    }
+    .banner .container .left{
+        width: 100%;
+        padding: 10px;
+    }   
+    .banner .container .right{
+        width: 100%;
+    }       
+}
+/* ----------------- */
+
 
 #info-box{
     background-color: white;
@@ -37,6 +132,7 @@ html {
     margin-bottom: 2em;
     border-radius: 0.4em;
 }
+
 
 #page {
     display: inline-grid;
@@ -50,6 +146,8 @@ html {
     grid-column: 2 / 4;
     grid-row: 1;
 }
+
+
 
 .box1{
     display: flex;

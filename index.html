@@ -16,6 +16,7 @@
     <script src="librerias/vuetify.js"></script>
     <script src="componentes/VisualizadorHuffman.js"></script>
     <script src="componentes/info.js"></script>
+    <script src="./Assets/js/sticky.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
     <style>
@@ -32,31 +33,42 @@
 <body>
     <div id="app">
         <v-app>
-            <v-app-bar app style="
-                background-color: rgba(255, 255, 255, 0.5) !important;
-                backdrop-filter: saturate(180%) blur(20px) !important;
-              ">
+            <v-app-bar absolute elevate-on-scroll class="no-sticky" id="navbar">
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
-                <v-spacer></v-spacer>
-                
+            </v-app-bar>            
 
-                <v-menu left bottom offset-y rounded="lg">
-                    <template v-slot:activator="{ on, attrs }">
-                  <v-btn icon v-bind="attrs" v-on="on">
-                    <v-avatar
-                      size="32"
-                    >
-                      <v-icon> mdi-clipboard-list </v-icon>
-                    </v-avatar>
-                  </v-btn>
-                </template>
-                </v-menu>
-            </v-app-bar>
-            
+            <!-- Banner superior --> 
+            <section class="banner">
+                <div class="container flex">
+                    <div class="left flex">
+                        <div class="flex-1">
+                            <h1>Algoritmo de codificación de Huffman.</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo quas, fugit in, dolores libero omnis earum a et consectetur atque ea sit necessitatibus velit enim facilis quo dolorem beatae obcaecati.
+                            </p>
+                            <div class="buttons">
+                                <a href="#visualizador-huffman" class="v-btn v-btn--has-bg v-size--default animacion_link btn-personal-primary">
+                                    Animación
+                                </a>
+                                <a href="#info-box" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
+                                    Algoritmo
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="right flex">
+                        <img src="./Assets/Images/Arbol.png" alt="AlgoritmoHuffman.webp" class="responsive-img">
+                        <!-- <v-parallax src="./Assets/Images/Arbol.png"></v-parallax> -->
+                    </div>
+                </div>
+            </section>
+
             <v-main class="lighten-2">
                 <v-container>
                     <v-info></v-info>
                     <v-row></v-row>
+                    <h2 id="visualizador-huffman" class="link-scroll">Animación de codificación de Huffman</h2>
                     <visualizador-huffman />
                 </v-container>
             </v-main>

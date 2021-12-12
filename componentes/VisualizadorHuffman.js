@@ -65,9 +65,6 @@ const VisualizadorHuffman = {
         <v-card-title class="align-start">
           <span>Visualizar árbol de codificación óptimo</span>
           <v-spacer></v-spacer>
-          <v-btn icon small class="mt-n2 me-n3">
-            <v-icon size="22"> mdi-clipboard-list </v-icon>
-          </v-btn>
         </v-card-title>
     
         <v-card-text>
@@ -76,7 +73,7 @@ const VisualizadorHuffman = {
             label="Escribe el mensaje que deseas codificar"
             v-model="cadena"
           ></v-textarea>
-          <v-btn block color="primary" @click="generarNodos()"> Construir árbol </v-btn>
+          <v-btn block color="" class="btn-personal-primary" @click="generarNodos()"> Construir árbol </v-btn>
           
         </v-card-text>
       </v-card>
