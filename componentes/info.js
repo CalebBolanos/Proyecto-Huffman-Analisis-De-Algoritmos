@@ -7,22 +7,22 @@ class info extends HTMLElement {
         this.innerHTML = `
         <div id="info-box">
             <div id="page">
-                <div class="titulo"><h1>¿Qué es el algoritmo de Huffman?</h1></div>
+                <div class="titulo flex"><h1>¿Qué es el algoritmo de Huffman?</h1></div>
 
-                <div class="box1">
+                <div class="box box1">
                     El algoritmo de codificación de Huffman es un método para compresión de archivos desarrollado por
                     David A. Huffman en 1952 que toma un alfabeto de n símbolos,junto con sus frecuencias de aparición asociadas
                     y produce un código de Huffman para esas frecuencias y alfabeto.
                 </div>
 
-                <div class="img1">
+                <div class="box img1">
                     El algoritmo consiste en la creación de un árbol binario que tiene cada uno de los
                     símbolos por hoja, y construido de tal forma que siguiéndolo desde la raíz a cada una de
                     sus hojas se obtiene el código Huffman asociado.
                 </div>
 
-                <div class="box2-text">El procedimiento es:</div>
-                <div class="box2">
+                <div class="box box2">
+                    <h2>Algoritmo</h2>
                     <ol>
                         <li>Generar un árbol sin hijos por cada símbolo del alfabeto.</li>
                         <li>Tomamos dos árboles de menor frecuencia y creamos con ellos un nuevo árbol
@@ -36,5 +36,7 @@ class info extends HTMLElement {
         `;
     }
 }
+
+{/* <div class="box box2-text">El procedimiento es:</div> */}
 
 window.customElements.define("v-info", info);
