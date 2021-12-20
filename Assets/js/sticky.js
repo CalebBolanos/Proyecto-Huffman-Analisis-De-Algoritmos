@@ -10,10 +10,10 @@ window.addEventListener("load", function(){
         // console.log(y);
         if (y > 0) {
             navbar.classList.add("sticky");
-            console.log("Sticky");
+            // console.log("Sticky");
         } else {
             navbar.classList.remove("sticky");
-            console.log("NO Sticky");
+            // console.log("NO Sticky");
         }
     }
 

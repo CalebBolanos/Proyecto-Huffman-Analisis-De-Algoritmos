@@ -254,3 +254,21 @@ html {
     }            
 }
 
+/* ----------------- Codificador Huffman Resultados (pesos) ----------------- */
+
+.span-size{
+    font-size: 18px;
+    color: var(--bondi_blue);
+}
+
+.percent-compretion{
+    font-weight: bold;
+    color: var(--bondi_blue);
+    text-align: center;
+}
+
+h6.percent-compretion{
+    font-size: 25px;
+    text-align: center;
+    margin: auto;
+}

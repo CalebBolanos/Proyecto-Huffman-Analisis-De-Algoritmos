@@ -109,19 +109,51 @@ while (colaPrioridad.length > 1) {
       </v-card>
     </v-col>
     <v-col cols="12">
-      <v-card rounded="lg" elevation="0" min-height="80vh">
-        <v-card-title class="align-start">
-        <span>Mensaje códificado</span>
-        <v-spacer></v-spacer>
-        </v-card-title>
-        <v-card-text>
-        {{cadenaCodificadaBytes}}
-        </v-card-text>
-      </v-card>
+        <v-card rounded="lg" elevation="0">
+            <v-card-title class="align-start">
+                <span>Mensaje códificado</span>
+                <v-spacer></v-spacer>
+                <span class="span-size" v-if="cadenaCodificadaBytes">Tamaño: {{tamanoCodificadoBytes}} bytes</span>
+            </v-card-title>
+            <v-card-text v-if="cadenaCodificadaBytes">
+                {{cadenaCodificadaBytes}}
+            </v-card-text>
+            <v-card-text v-else>
+                Aquí podrás visualizar el resultado de códificar tu mensaje mediante la codificación de Huffman.
+            </v-card-text>            
+        </v-card>
     </v-col>
+
+    <v-col cols="12">
+        <v-card rounded="lg" elevation="0">
+            <v-card-title class="align-start">
+                <span>Mensaje original</span>
+                <v-spacer></v-spacer>
+                <span class="span-size" v-if="tamanoMensajeBytes">Tamaño: {{tamanoMensajeBytes}} bytes</span>
+            </v-card-title>
+            <v-card-text v-if="cadena">
+                {{cadena}}
+            </v-card-text>
+            <v-card-text v-else>
+                Aquí podrás visualizar tu mensaje original.
+            </v-card-text>            
+        </v-card>
+    </v-col>    
+
+    <v-col cols="12" v-if="porcentajeCompresion">
+        <v-card rounded="lg" elevation="0">
+            <v-card-title class="align-center percent-compretion">
+                <span>Porcentaje de compresión total {{porcentajeCompresion}}%</span>
+                <v-spacer></v-spacer>
+            </v-card-title>          
+        </v-card>
+    </v-col>       
+
+    <h6 class="percent-compretion" v-if="porcentajeCompresion">
+        Porcentaje de compresión total {{porcentajeCompresion}}%
+    </h6>
     </v-row>
     `,
-
     /**
      * Objeto data, el cual contiene los datos que se utilizaran para llevar a cabo el 
      * algoritmo de Huffman y su representacion animada. Dentro de el encontramos:
@@ -154,8 +186,20 @@ while (colaPrioridad.length > 1) {
         cadenaCodificadaBytes: "",
         tamanoMensajeBytes: 0,
         tamanoCodificadoBytes: 0,
-
+        porcentajeCompresion: null,
     }),
+    /**
+     * Hook de ciclo de vida del componente watch
+     * 
+     * Cuando el watch detecta cambios en los datos observados ejecuta la funcion
+     * definida para ese dato
+     */    
+    watch: {
+        cadena(cadena) {
+            // console.log("Recalculando tamaño de bytes de cadena original");
+            this.tamanoMensajeBytes = this.cadena.length; // <-- Calculando tamaño al cargar página
+        }
+    },
 
     /**
      * Hook de ciclo de vida del componente mounted()
@@ -165,6 +209,8 @@ while (colaPrioridad.length > 1) {
      * poder usarlas a lo largo del componente,
      */
     mounted() {
+        this.tamanoMensajeBytes = this.cadena.length; // <-- Calculando tamaño al cargar página
+
         let cytoscape = window.cytoscape({
             container: this.$refs.cy,
             elements: [
@@ -664,7 +710,6 @@ while (colaPrioridad.length > 1) {
         codificarString() {
             for (i = 0; i < this.cadena.length; i++) {
                 this.cadenaCodificadaBits += this.codigosSimbolos[this.cadena.charAt(i)];
-
             }
 
             this.tamanoMensajeBytes = this.cadena.length;
@@ -673,12 +718,13 @@ while (colaPrioridad.length > 1) {
             console.log('mensaje', this.tamanoMensajeBytes);
             console.log('codificado', this.tamanoCodificadoBytes);
 
-            console.log('porcentaje', (this.tamanoCodificadoBytes * 100) / this.tamanoMensajeBytes);
+            this.porcentajeCompresion = (this.tamanoCodificadoBytes * 100) / this.tamanoMensajeBytes;
+            console.log('porcentaje', this.porcentajeCompresion);
 
             let bytesRegex = this.cadenaCodificadaBits.match(/.{1,8}/g);
             this.cadenaCodificadaBytes = bytesRegex.join(' ');
 
-        }
+        }   
 
     },
 
