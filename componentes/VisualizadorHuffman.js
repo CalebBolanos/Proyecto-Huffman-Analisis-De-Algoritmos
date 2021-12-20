@@ -667,8 +667,8 @@ while (colaPrioridad.length > 1) {
 
             }
 
-            this.tamanoMensajeBytes = this.cadena.length * 8;
-            this.tamanoCodificadoBytes = this.cadenaCodificadaBits.length;
+            this.tamanoMensajeBytes = this.cadena.length;
+            this.tamanoCodificadoBytes = this.cadenaCodificadaBits.length / 8;
 
             console.log('mensaje', this.tamanoMensajeBytes);
             console.log('codificado', this.tamanoCodificadoBytes);
