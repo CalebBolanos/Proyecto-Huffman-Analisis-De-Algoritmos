@@ -131,11 +131,12 @@ while (colaPrioridad.length > 1) {
      * de reactividad de Vue
      */
     data: () => ({
-        cadena: "anita lava la tina",
+        cadena: "ACCCAABABAABABACBCBBACADDDDDFDCACAEEEEECBCAFFCACAAAAAEEEEDADADADDAAABDAAFFDADBDBDAAABAABAAAAAAAAAAAA",
         n: 0,
         charArray: [],
         charFreq: [],
         colaPrioridad: [],
+        codigosSimbolos: {},
         cy: undefined,
         editor: undefined,
     }),
@@ -384,6 +385,10 @@ while (colaPrioridad.length > 1) {
             }
             this.editor.gotoLine(2); //indica en que linea de codigo esta actualmente la animacion
             await this.sleep(1000);
+            this.imprimirCodigosEnNodos(colaPrioridad[0], "");
+            console.log(this.codigosSimbolos);
+
+
 
             //finalmente ajustamos la instancia de cy para mostrar el arbol de forma que ocupe todo el espacio
             this.acomodarNodos(this.cy);
@@ -540,14 +545,14 @@ while (colaPrioridad.length > 1) {
                         source: idNuevoArbol,
                         target: idNodoUno
                     }
-                // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                    // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
                 }).css({
                     label: `0`,
                     'text-halign': 'left',
-                    'text-valign': 'center', 
+                    'text-valign': 'center',
                     'text-margin-x': '-15px',
-                    'text-outline-color': '#FF5733',   
-                    'text-background-color': '#FF5733',                     
+                    'text-outline-color': '#FF5733',
+                    'text-background-color': '#FF5733',
                 });
             }, 4000);
 
@@ -561,14 +566,14 @@ while (colaPrioridad.length > 1) {
                         source: idNuevoArbol,
                         target: idNodoDos,
                     }
-                // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
+                    // }); //psss!! para poner los numeros (0 y 1) chequen las lineas 320-322
                 }).css({
-                    label: `1`,  
+                    label: `1`,
                     'text-halign': 'left',
-                    'text-valign': 'center', 
+                    'text-valign': 'center',
                     'text-margin-x': '15px',
-                    'text-outline-color': '#FF5733',   
-                    'text-background-color': '#FF5733',                                     
+                    'text-outline-color': '#FF5733',
+                    'text-background-color': '#FF5733',
                 });
             }, 5000);
 
@@ -599,6 +604,40 @@ while (colaPrioridad.length > 1) {
                     }
                 }).run();
             }, 6000);
+        },
+
+        imprimirCodigosEnNodos(raiz, cadenaCodificacion) {
+            if (raiz.izquierda == null && raiz.derecha == null) {
+                console.log(raiz.caracter + ": " + cadenaCodificacion);
+                this.codigosSimbolos[raiz.idCy] = cadenaCodificacion;
+                this.crearPopper(this.cy.getElementById(raiz.idCy), cadenaCodificacion);
+                return;
+            }
+
+            this.imprimirCodigosEnNodos(raiz.izquierda, cadenaCodificacion + "0");
+            this.imprimirCodigosEnNodos(raiz.derecha, cadenaCodificacion + "1");
+        },
+
+        crearPopper(nodo, codigo) {
+            let ref = nodo.popperRef();
+
+            nodo.tippy = tippy(ref, {
+                content: () => {
+                    let content = document.createElement("div");
+
+                    content.innerHTML = codigo;
+
+                    return content;
+                },
+                trigger: "manual",
+                placement: 'bottom',
+            });
+
+            nodo.unbind("mouseover");
+            nodo.bind("mouseover", event => event.target.tippy.show());
+
+            nodo.unbind("mouseout");
+            nodo.bind("mouseout", event => event.target.tippy.hide());
         }
 
     },

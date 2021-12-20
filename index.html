@@ -11,6 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
     <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
     <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+    <script src="https://unpkg.com/popper.js@1.14.7/dist/umd/popper.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-popper@1.0.4/cytoscape-popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@4.0.1/umd/index.all.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@4.0.1/index.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
@@ -27,6 +31,10 @@
         .v-app-bar-title__content {
             width: 300px;
         }
+        
+        body {
+            font-family: "Quicksand";
+        }
     </style>
 </head>
 
@@ -35,9 +43,9 @@
         <v-app>
             <v-app-bar absolute elevate-on-scroll class="no-sticky" id="navbar">
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
-            </v-app-bar>            
+            </v-app-bar>
 
-            <!-- Banner superior --> 
+            <!-- Banner superior -->
             <section class="banner">
                 <div class="container flex">
                     <div class="left flex">
