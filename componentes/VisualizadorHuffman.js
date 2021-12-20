@@ -108,6 +108,17 @@ while (colaPrioridad.length > 1) {
         <div id="cy" ref="cy" style="width: 100%; height: 80vh; display: block"></div>
       </v-card>
     </v-col>
+    <v-col cols="12">
+      <v-card rounded="lg" elevation="0" min-height="80vh">
+        <v-card-title class="align-start">
+        <span>Mensaje códificado</span>
+        <v-spacer></v-spacer>
+        </v-card-title>
+        <v-card-text>
+        {{cadenaCodificadaBytes}}
+        </v-card-text>
+      </v-card>
+    </v-col>
     </v-row>
     `,
 
@@ -139,6 +150,11 @@ while (colaPrioridad.length > 1) {
         codigosSimbolos: {},
         cy: undefined,
         editor: undefined,
+        cadenaCodificadaBits: "",
+        cadenaCodificadaBytes: "",
+        tamanoMensajeBytes: 0,
+        tamanoCodificadoBytes: 0,
+
     }),
 
     /**
@@ -277,6 +293,10 @@ while (colaPrioridad.length > 1) {
             this.charArray = []
             this.charFreq = []
             this.colaPrioridad = []
+            this.cadenaCodificadaBits = "";
+            this.cadenaCodificadaBytes = "";
+
+            Object.keys(this.codigosSimbolos).forEach(k => delete this.codigosSimbolos[k])
 
             this.obtenerFrecuencias(this.cadena)
 
@@ -386,6 +406,7 @@ while (colaPrioridad.length > 1) {
             this.editor.gotoLine(2); //indica en que linea de codigo esta actualmente la animacion
             await this.sleep(1000);
             this.imprimirCodigosEnNodos(colaPrioridad[0], "");
+            this.codificarString();
             console.log(this.codigosSimbolos);
 
 
@@ -609,7 +630,7 @@ while (colaPrioridad.length > 1) {
         imprimirCodigosEnNodos(raiz, cadenaCodificacion) {
             if (raiz.izquierda == null && raiz.derecha == null) {
                 console.log(raiz.caracter + ": " + cadenaCodificacion);
-                this.codigosSimbolos[raiz.idCy] = cadenaCodificacion;
+                this.codigosSimbolos[raiz.caracter] = cadenaCodificacion;
                 this.crearPopper(this.cy.getElementById(raiz.idCy), cadenaCodificacion);
                 return;
             }
@@ -638,6 +659,25 @@ while (colaPrioridad.length > 1) {
 
             nodo.unbind("mouseout");
             nodo.bind("mouseout", event => event.target.tippy.hide());
+        },
+
+        codificarString() {
+            for (i = 0; i < this.cadena.length; i++) {
+                this.cadenaCodificadaBits += this.codigosSimbolos[this.cadena.charAt(i)];
+
+            }
+
+            this.tamanoMensajeBytes = this.cadena.length * 8;
+            this.tamanoCodificadoBytes = this.cadenaCodificadaBits.length;
+
+            console.log('mensaje', this.tamanoMensajeBytes);
+            console.log('codificado', this.tamanoCodificadoBytes);
+
+            console.log('porcentaje', (this.tamanoCodificadoBytes * 100) / this.tamanoMensajeBytes);
+
+            let bytesRegex = this.cadenaCodificadaBits.match(/.{1,8}/g);
+            this.cadenaCodificadaBytes = bytesRegex.join(' ');
+
         }
 
     },
