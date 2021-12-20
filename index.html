@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/cytoscape-popper@1.0.4/cytoscape-popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@4.0.1/umd/index.all.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@4.0.1/index.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
@@ -46,7 +48,7 @@
             </v-app-bar>
 
             <!-- Banner superior -->
-            <section class="banner">
+            <section class="banner" data-aos="fade-up" data-aos-duration="700">
                 <div class="container flex">
                     <div class="left flex">
                         <div class="flex-1">
@@ -76,8 +78,8 @@
                 <v-container>
                     <v-info></v-info>
                     <v-row></v-row>
-                    <h2 id="visualizador-huffman" class="link-scroll">Animación de codificación de Huffman</h2>
-                    <visualizador-huffman />
+                    <h2 id="visualizador-huffman" class="link-scroll" data-aos="fade-up">Animación de codificación de Huffman</h2>
+                    <visualizador-huffman/>
                 </v-container>
             </v-main>
         </v-app>
@@ -85,7 +87,7 @@
 
     <script>
         Vue.component("visualizador-huffman", VisualizadorHuffman);
-        new Vue({
+        const app = new Vue({
             el: '#app',
             data: () => ({
                 cadena: '',
@@ -94,6 +96,7 @@
             computed: {},
             vuetify: new Vuetify(),
         })
+        Vue.use(AOS.init());
     </script>
 </body>
 

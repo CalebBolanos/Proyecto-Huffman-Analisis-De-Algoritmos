@@ -5,7 +5,7 @@ class info extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-        <div id="info-box">
+        <div id="info-box" data-aos="zoom-in" data-aos-duration="700">
             <div id="page">
                 <div class="titulo flex"><h1>¿Qué es el algoritmo de Huffman?</h1></div>
 
@@ -37,6 +37,6 @@ class info extends HTMLElement {
     }
 }
 
-{/* <div class="box box2-text">El procedimiento es:</div> */}
+{ /* <div class="box box2-text">El procedimiento es:</div> */ }
 
 window.customElements.define("v-info", info);

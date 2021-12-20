@@ -60,10 +60,10 @@ const VisualizadorHuffman = {
     //plantilla con el codigo html que representa al componente
     template: `
     <v-row>
-    <v-col cols="12" sm="12">
+    <v-col cols="12" sm="12" data-aos="fade-up" data-aos-delay="200">
       <v-card rounded="lg" elevation="0">
         <v-card-title class="align-start">
-          <span>Visualizar árbol de codificación óptimo</span>
+          <h4>Visualizar árbol de codificación óptimo</h4>
           <v-spacer></v-spacer>
         </v-card-title>
     
@@ -78,10 +78,10 @@ const VisualizadorHuffman = {
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="6" lg="6">
+    <v-col cols="12" sm="12" md="6" lg="6" data-aos="fade-up" data-aos-delay="300">
       <v-card rounded="lg" elevation="0" min-height="80vh">
         <v-card-title class="align-start">
-          <span>Algoritmo de Huffman (JavaScript)</span>
+          <h4>Algoritmo de Huffman (JavaScript)</h4>
           <v-spacer></v-spacer>
         </v-card-title>
         <v-card-text>
@@ -103,7 +103,7 @@ while (colaPrioridad.length > 1) {
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="6" lg="6">
+    <v-col cols="12" sm="12" md="6" lg="6" data-aos="fade-up" data-aos-delay="400">
       <v-card rounded="lg" elevation="0" min-height="80vh">
         <div id="cy" ref="cy" style="width: 100%; height: 80vh; display: block"></div>
       </v-card>
@@ -149,7 +149,7 @@ while (colaPrioridad.length > 1) {
         </v-card>
     </v-col>       
 
-    <h6 class="percent-compretion" v-if="porcentajeCompresion">
+    <h6 class="percent-compretion" v-if="porcentajeCompresion" >
         Porcentaje de compresión total {{porcentajeCompresion}}%
     </h6>
     </v-row>
@@ -193,7 +193,7 @@ while (colaPrioridad.length > 1) {
      * 
      * Cuando el watch detecta cambios en los datos observados ejecuta la funcion
      * definida para ese dato
-     */    
+     */
     watch: {
         cadena(cadena) {
             // console.log("Recalculando tamaño de bytes de cadena original");
@@ -724,7 +724,7 @@ while (colaPrioridad.length > 1) {
             let bytesRegex = this.cadenaCodificadaBits.match(/.{1,8}/g);
             this.cadenaCodificadaBytes = bytesRegex.join(' ');
 
-        }   
+        }
 
     },
 
