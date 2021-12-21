@@ -101,11 +101,24 @@ while (colaPrioridad.length > 1) {
 }
             </div>
         </v-card-text>
+        <v-card-subtitle class="align-start">
+            {{stringGreedy}}
+        </v-card-subtitle>
       </v-card>
     </v-col>
     <v-col cols="12" sm="12" md="6" lg="6" data-aos="fade-up" data-aos-delay="400">
       <v-card rounded="lg" elevation="0" min-height="80vh">
-        <div id="cy" ref="cy" style="width: 100%; height: 80vh; display: block"></div>
+        <div id="cy" ref="cy" style="width: 100%; height: 73vh; display: block"></div>
+        <v-card-actions class="justify-center" style="height: 7vh" v-if="cadenaCodificadaBytes">
+      <v-btn color="primary" @click="exportarArbol();">
+        Exportar árbol a PNG
+      </v-btn>
+
+      <v-btn text color="primary" @click="acomodarNodos(cy); cy.fit();">
+        Reajustar árbol
+      </v-btn>
+    </v-card-actions>
+    <v-card-actions style="height: 7vh" v-else></v-card-actions>
       </v-card>
     </v-col>
     <v-col cols="12">
@@ -182,11 +195,20 @@ while (colaPrioridad.length > 1) {
         codigosSimbolos: {},
         cy: undefined,
         editor: undefined,
+        saveAs: undefined,
         cadenaCodificadaBits: "",
         cadenaCodificadaBytes: "",
         tamanoMensajeBytes: 0,
         tamanoCodificadoBytes: 0,
         porcentajeCompresion: null,
+        stringGreedy: "",
+        elementosGreedy: {
+            'Conjunto de candidatos': 'Cada uno de los nodos dentro de la cola de prioridad',
+            'Funcion solucion': 'Unión de nodos en un nuevo árbol',
+            'Funcion de seleccion': 'Selección de nodos con menor frecuencia',
+            'Funcion de factibilidad': 'La cola de prioridad debe de tener mas de un elemento',
+            'Funcion objetivo': 'Árbol de codificación óptimo',
+        }
     }),
     /**
      * Hook de ciclo de vida del componente watch
@@ -259,6 +281,8 @@ while (colaPrioridad.length > 1) {
             //hScrollBarAlwaysVisible: false,
             fontSize: 11.7
         })
+
+        this.saveAs = window.saveAs;
     },
 
     /**
@@ -341,6 +365,7 @@ while (colaPrioridad.length > 1) {
             this.colaPrioridad = []
             this.cadenaCodificadaBits = "";
             this.cadenaCodificadaBytes = "";
+            this.stringGreedy = "Conjunto de candidatos: " + this.elementosGreedy['Conjunto de candidatos'];
 
             Object.keys(this.codigosSimbolos).forEach(k => delete this.codigosSimbolos[k])
 
@@ -414,9 +439,10 @@ while (colaPrioridad.length > 1) {
          */
         async AlgoritmoHuffman(colaPrioridad) {
             let iteraciones = 0;
-
+            await this.sleep(1000);
             //si solo existe un elemento ya se tiene el arbol de codificacion optima
             while (colaPrioridad.length > 1) {
+
                 //se toman los primeros dos arboles de menor frecuencia
                 let nodoUno = colaPrioridad.shift();
                 let nodoDos = colaPrioridad.shift();
@@ -446,11 +472,12 @@ while (colaPrioridad.length > 1) {
                     return a.frecuencia - b.frecuencia;
                 });
                 this.acomodarNodos(this.cy);
-
+                this.stringGreedy = "Función de factibilidad: " + this.elementosGreedy['Funcion de factibilidad'];
                 iteraciones++;
             }
-            this.editor.gotoLine(2); //indica en que linea de codigo esta actualmente la animacion
+            this.editor.gotoLine(14); //indica en que linea de codigo esta actualmente la animacion
             await this.sleep(1000);
+            this.stringGreedy = "Función objetivo: " + this.elementosGreedy['Funcion objetivo'];
             this.imprimirCodigosEnNodos(colaPrioridad[0], "");
             this.codificarString();
             console.log(this.codigosSimbolos);
@@ -504,8 +531,10 @@ while (colaPrioridad.length > 1) {
 
             //determina si un nodo es raiz si la clase asignada que tiene no esta en mas de un elemento
             let esRaiz = cy.$(`.${idNodoUno}`).length == 0;
+            let instanciaVue = this;
             setTimeout(function() {
                 editor.gotoLine(3);
+                instanciaVue.stringGreedy = "Función de selección: " + instanciaVue.elementosGreedy['Funcion de seleccion'];
                 if (esRaiz) { //si el nodo es raiz, se ejecuta la animacion de raiz
                     nodo1.addClass(idNuevoArbol);
                     nodo1.animate({
@@ -585,6 +614,7 @@ while (colaPrioridad.length > 1) {
             //agregamos nodo de huffman
             setTimeout(function() {
                 editor.gotoLine(6);
+                instanciaVue.stringGreedy = "Función solución: " + instanciaVue.elementosGreedy['Funcion solucion'];
                 cy.add({
                     data: {
                         id: idNuevoArbol,
@@ -724,6 +754,35 @@ while (colaPrioridad.length > 1) {
             let bytesRegex = this.cadenaCodificadaBits.match(/.{1,8}/g);
             this.cadenaCodificadaBytes = bytesRegex.join(' ');
 
+        },
+
+        exportarArbol() {
+            let b64key = 'base64,';
+            let b64 = this.cy.png().substring(this.cy.png().indexOf(b64key) + b64key.length);
+            let imgBlob = this.convertirABlob(b64, 'image/png');
+
+            this.saveAs(imgBlob, 'arbol.png');
+        },
+
+        convertirABlob(base64Data, contentType) {
+            contentType = contentType || '';
+            let sliceSize = 1024;
+            let byteCharacters = atob(base64Data);
+            let bytesLength = byteCharacters.length;
+            let slicesCount = Math.ceil(bytesLength / sliceSize);
+            let byteArrays = new Array(slicesCount);
+
+            for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+                let begin = sliceIndex * sliceSize;
+                let end = Math.min(begin + sliceSize, bytesLength);
+
+                let bytes = new Array(end - begin);
+                for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+                    bytes[i] = byteCharacters[offset].charCodeAt(0);
+                }
+                byteArrays[sliceIndex] = new Uint8Array(bytes);
+            }
+            return new Blob(byteArrays, { type: contentType });
         }
 
     },
