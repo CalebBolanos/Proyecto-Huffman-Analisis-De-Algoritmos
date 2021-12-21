@@ -95,9 +95,25 @@
             }),
             methods: {},
             computed: {},
-            vuetify: new Vuetify(),
+            vuetify: new Vuetify({
+                theme: {
+                    themes: {
+                        light: {
+                            primary: '#018ABE',
+                            secondary: '#02457A',
+                            accent: '#97CADB',
+                            error: '#FF5252',
+                            info: '#2196F3',
+                            success: '#4CAF50',
+                            warning: '#FFC107',
+                        },
+                    },
+                },
+            }),
         })
-        Vue.use(AOS.init());
+        Vue.use(AOS.init({
+            once: true
+        }));
     </script>
 </body>
 

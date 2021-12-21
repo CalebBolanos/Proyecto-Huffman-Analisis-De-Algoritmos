@@ -73,7 +73,7 @@ const VisualizadorHuffman = {
             label="Escribe el mensaje que deseas codificar"
             v-model="cadena"
           ></v-textarea>
-          <v-btn block color="" class="btn-personal-primary" @click="generarNodos()"> Construir árbol </v-btn>
+          <v-btn block color="primary" @click="generarNodos()"> Construir árbol </v-btn>
           
         </v-card-text>
       </v-card>
@@ -155,16 +155,15 @@ while (colaPrioridad.length > 1) {
 
     <v-col cols="12" v-if="porcentajeCompresion">
         <v-card rounded="lg" elevation="0">
-            <v-card-title class="align-center percent-compretion">
-                <span>Porcentaje de compresión total {{porcentajeCompresion}}%</span>
+            <v-card-title class="justify-center percent-compretion">
+                <span>Porcentaje de compresión total {{porcentajeCompresion.toFixed(2)}}%</span>
+                <template>
+                    <v-progress-linear :value="porcentajeCompresion"></v-progress-linear>
+                </template>
                 <v-spacer></v-spacer>
             </v-card-title>          
         </v-card>
     </v-col>       
-
-    <h6 class="percent-compretion" v-if="porcentajeCompresion" >
-        Porcentaje de compresión total {{porcentajeCompresion}}%
-    </h6>
     </v-row>
     `,
     /**
