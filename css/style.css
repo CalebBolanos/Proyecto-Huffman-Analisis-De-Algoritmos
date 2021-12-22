@@ -276,6 +276,10 @@ h2{
     padding: 10px;
 }
 
+.information-msg{
+    
+}
+
 @media screen and (max-width: 480px) {
     .algorithm-steps {
         max-width: 80%;
