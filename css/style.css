@@ -64,6 +64,16 @@ html {
     color: whitesmoke !important;
 }   
 
+.no-sticky .nav-items a{
+    color: rgba(0,0,0,.87);
+    text-decoration: none;
+    padding: 0 10px 0 10px;
+}
+
+.sticky .nav-items a{
+    color: whitesmoke !important;
+}
+
 .responsive-img{
     width: 100%;
 }
