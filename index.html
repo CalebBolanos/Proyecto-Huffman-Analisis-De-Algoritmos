@@ -19,6 +19,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
 
@@ -54,26 +56,38 @@
                 <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn color="black" text href="#">Botones</v-btn>
-                <v-btn color="black" text href="#">Botones</v-btn>
+                <span class="hidden-md-and-down">
+                    <v-btn color="black" text href="#historia">Historia</v-btn>
+                    <v-btn color="black" text href="#funcionamiento">Funcionamiento</v-btn>
+                    <v-btn color="black" text href="#algorithm-box">Algoritmo</v-btn>
+                    <v-btn color="black" text href="#greedy">Greedy</v-btn>
+                    <v-btn color="black" text href="#usos">Usos</v-btn>
+                    <v-btn color="black" text href="#visualizador-huffman">Animación</v-btn>
+                </span>
+
 
             </v-app-bar>
 
             <v-navigation-drawer v-model="drawer" fixed temporary>
                 <v-list nav dense>
-                    <v-list-item-group v-model="group" active-class="accent--text text--accent-4">
-                        <v-list-item href="#">
-                            <v-list-item-icon>
-                                <v-icon>mdi-home</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>Item 1</v-list-item-title>
+                    <v-list-item-group v-model="group" active-class="primary--text text--primary-4">
+                        <v-list-item href="#historia">
+                            <v-list-item-title>Historia</v-list-item-title>
                         </v-list-item>
-
-                        <v-list-item href="#">
-                            <v-list-item-icon>
-                                <v-icon>mdi-clipboard-list</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>Item 2</v-list-item-title>
+                        <v-list-item href="#funcionamiento">
+                            <v-list-item-title>Funcionamiento</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item href="#algorithm-box">
+                            <v-list-item-title>Algoritmo</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item href="#greedy">
+                            <v-list-item-title>Greedy</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item href="#usos">
+                            <v-list-item-title>Usos</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item href="#visualizador-huffman">
+                            <v-list-item-title>Animación</v-list-item-title>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
