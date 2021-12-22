@@ -26,7 +26,7 @@
 
     <script src="componentes/VisualizadorHuffman.js"></script>
     <script src="componentes/info.js"></script>
-    <script src="./Assets/js/sticky.js"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/algorithm-steps.scss">
@@ -61,8 +61,8 @@
                     <v-btn color="black" text href="#funcionamiento">Funcionamiento</v-btn>
                     <v-btn color="black" text href="#algorithm-box">Algoritmo</v-btn>
                     <v-btn color="black" text href="#greedy">Greedy</v-btn>
-                    <v-btn color="black" text href="#usos">Usos</v-btn>
                     <v-btn color="black" text href="#visualizador-huffman">Animación</v-btn>
+                    <v-btn color="black" text href="#usos">Usos</v-btn>
                 </span>
 
 
@@ -83,19 +83,18 @@
                         <v-list-item href="#greedy">
                             <v-list-item-title>Greedy</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#usos">
-                            <v-list-item-title>Usos</v-list-item-title>
-                        </v-list-item>
                         <v-list-item href="#visualizador-huffman">
                             <v-list-item-title>Animación</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item href="#usos">
+                            <v-list-item-title>Usos</v-list-item-title>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
             </v-navigation-drawer>
 
-
             <!-- Banner superior -->
-            <section class="banner" data-aos="fade-up" data-aos-duration="700">
+            <section class="banner" data-aos="fade-up" data-aos-duration="700" style="margin-top: 70px">
                 <div class="container flex">
                     <div class="left flex">
                         <div class="flex-1">
@@ -105,11 +104,11 @@
                             </p>
                             <div class="buttons">
                                 <a href="#visualizador-huffman" class="v-btn v-btn--has-bg v-size--default animacion_link btn-personal-primary">
-                                    Animación
-                                </a>
+                        Animación
+                    </a>
                                 <a href="#algorithm-box" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
-                                    Algoritmo
-                                </a>
+                        Algoritmo
+                    </a>
                             </div>
 
                         </div>
@@ -247,8 +246,22 @@
                 </div>
             </section>
 
+
+
+
+            <v-main class="lighten-2">
+                <v-container>
+                    <!-- <v-info></v-info> -->
+                    <v-row dense>
+
+
+                    </v-row>
+                    <h2 id="visualizador-huffman" class="link-scroll text-center my-5" data-aos="fade-up">Animación de codificación de Huffman</h2>
+                    <visualizador-huffman/>
+                </v-container>
+            </v-main>
             <!-- ¿Para que sirve este algoritmo? -->
-            <section class="section-information section" data-aos="fade-up" data-aos-duration="700" id="usos">
+            <section class="section-information section" data-aos="fade-up" data-aos-duration="700" id="usos" style="padding-bottom: 50px;">
                 <h2>¿Para que sirve este algoritmo?</h2>
                 <div class="section-text-img">
                     <img src="./Assets/Images/png.png" alt="PNG.png" class="img-info" id="PNG-img" title="¿Para que sirve este algoritmo?">
@@ -259,15 +272,6 @@
                     </div>
                 </div>
             </section>
-
-            <v-main class="lighten-2">
-                <v-container>
-                    <!-- <v-info></v-info> -->
-                    <v-row></v-row>
-                    <h2 id="visualizador-huffman" class="link-scroll" data-aos="fade-up">Animación de codificación de Huffman</h2>
-                    <visualizador-huffman/>
-                </v-container>
-            </v-main>
         </v-app>
     </div>
 

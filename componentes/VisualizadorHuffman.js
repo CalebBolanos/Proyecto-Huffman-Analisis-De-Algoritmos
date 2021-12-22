@@ -186,7 +186,7 @@ while (colaPrioridad.length > 1) {
      * de reactividad de Vue
      */
     data: () => ({
-        cadena: "ACCCAABABAABABACBCBBACADDDDDFDCACAEEEEECBCAFFCACAAAAAEEEEDADADADDAAABDAAFFDADBDBDAAABAABAAAAAAAAAAAA",
+        cadena: "",
         n: 0,
         charArray: [],
         charFreq: [],
@@ -438,7 +438,7 @@ while (colaPrioridad.length > 1) {
          */
         async AlgoritmoHuffman(colaPrioridad) {
             let iteraciones = 0;
-            await this.sleep(1000);
+            await this.sleep(2000);
             //si solo existe un elemento ya se tiene el arbol de codificacion optima
             while (colaPrioridad.length > 1) {
 
