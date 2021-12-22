@@ -139,6 +139,7 @@ h2{
 .section-information.section {
     width: 70%;
     margin: auto;
+    margin-top: 50px;
 }
 
 .section-information {
@@ -146,11 +147,6 @@ h2{
     text-align: center;
     background: transparent;
 }
-.section-information.section {
-    width: 70%;
-    margin: auto;
-}
-
 .section-information .section-text-img {
     width: 100%;
     display: flex;
@@ -179,6 +175,12 @@ h2{
     max-width: 30%;
 }
 
+#PNG-img{
+    max-width: 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 @media screen and (max-width: 640px) {
     .section-information .section-text-img {
         width: 100%;
@@ -197,6 +199,9 @@ h2{
     #problema-img{
         max-width: 80%;
     }
+    #PNG-img{
+        max-width: 40%;
+    }    
 }
 @media screen and (max-width: 480px) {
     .section-information.section{
@@ -209,7 +214,11 @@ h2{
     #huffman-img {
         margin-bottom: 10px;
         margin-top: 10px;
-    }      
+    }   
+    #PNG-img{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }          
 }
 
 /* ----------------- Sección Algorithm Steps ----------------- */
