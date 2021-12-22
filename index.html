@@ -21,11 +21,13 @@
     <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
     <script src="librerias/vue.js"></script>
     <script src="librerias/vuetify.js"></script>
+
     <script src="componentes/VisualizadorHuffman.js"></script>
     <script src="componentes/info.js"></script>
     <script src="./Assets/js/sticky.js"></script>
-
+    <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/algorithm-steps.scss">
     <style>
         .v-application {
             font-family: "Quicksand";
@@ -74,6 +76,130 @@
                     </div>
                 </div>
             </section>
+
+            <!-- ¿Qué es el algoritmo de Huffman? -->
+            <section class="section-information section" data-aos="fade-up" data-aos-duration="700">
+                <h2>¿Qué es el algoritmo de Huffman?</h2>
+                <div class="section-text-img">
+                    <div class="text-info">
+                        La codificación de Huffman es una técnica para la <b>compresión de datos</b> mediante el estudio de la frecuencia de aparición de caracteres, 
+                        la cual es ampliamente usada y muy efectiva. Fue desarrollado por el norteamericano David Albert Huffman en 1952 mientras hacía el doctorado
+                        en el MIT. El método fue publicado en una revista como “A Method for the Construction of Minimum-Redundancy Codes” el cual puedes  
+                        <a href="http://compression.ru/download/articles/huff/huffman_1952_minimum-redundancy-codes.pdf" target="_blank">consultar aquí</a>.
+                    </div>
+                    <img src="./Assets/Images/Huffman.jpg" alt="Huffman.jpg" class="img-info" id="huffman-img" title="David Albert Huffman">
+                </div>
+            </section>
+
+            <!-- ¿Cómo funciona el algoritmo de Huffman? -->
+            <section class="section-information section" data-aos="fade-up" data-aos-duration="700">
+                <h2>¿Cómo funciona el algoritmo de Huffman?</h2>
+                <div class="section-text-img">
+                    <img src="./Assets/Images/Huffman.jpg" alt="Huffman.jpg" class="img-info" id="huffman-img" title="David Albert Huffman">
+                    <div class="text-info">
+                        <p>
+                        Huffman inventó un <b>algoritmo voraz</b> que construye un árbol de codificación optima, del cual, se obtiene la codificación optima de un mensaje dado. 
+                        El algoritmo funciona a partir de un alfabeto de n símbolos, junto con sus frecuencias de aparición asociadas y produce un código de Huffman para
+                        esas frecuencias y alfabeto.
+                        </p>
+
+                        <p>
+                        El algoritmo consiste en la creación de un árbol binario que tiene cada uno de los símbolos por hoja, y construido de tal forma que, 
+                        siguiéndolo desde la raíz a cada una de sus hojas se obtiene el código Huffman asociado. 
+                        </p>                       
+                    </div>
+                </div>
+            </section>           
+            
+            <!-- Pasos del algoritmo -->
+            <section class="section-information section" data-aos="fade-up" data-aos-duration="700">
+                <h2>Pasos del algoritmo</h2>
+                <h3>Para obtener el árbol de codificación optimo:</h3>
+                <div class="algorithm-steps">
+                    <p>
+                        Para cada carácter único del alfabeto, crear un nodo hoja y crear una cola donde el carácter menos frecuente es el primero (cola de prioridad).
+                    </p>
+                    <p>
+                        Extraer dos nodos con la frecuencia mínima de la cola de prioridad.
+                    </p>
+                    <p>
+                        Cree un nuevo nodo con la frecuencia igual a la suma de las frecuencias de los dos nodos. El primer nodo extraído será su hijo izquierdo y el otro nodo extraído como hijo derecho. Ingresar el nodo a la cola de prioridad nuevamente.
+                    </p>
+                    <p>
+                        Repita los pasos 2 y 3 hasta que la cola de prioridad contenga solo un nodo. El nodo restante es el nodo raíz y el árbol está completo.
+                    </p>
+                </div>
+
+                <h3>Para obtener los códigos óptimos por cada carácter del alfabeto:</h3>
+                <div class="algorithm-steps">
+                    <p>
+                        Iniciar siempre el recorrido en el árbol formado a partir de la raíz. Tener una matriz auxiliar. 
+                    </p>
+                    <p>
+                        Mientras nos movemos a la izquierda escribir 0.
+                    </p>
+                    <p>
+                        Mientras nos movemos a la derecha escribir 1.
+                    </p>
+                    <p>
+                        Si llegamos a una hoja imprima la matriz.
+                    </p>
+                </div>                
+            </section>               
+
+            <!-- CODIFICACIÓN VORAZ/GREEDY -->
+            <section class="section-information" data-aos="fade-up" data-aos-duration="700">
+                <h2>¿Por qué es un algoritmo voraz (Greedy)?</h2>
+                <div class="container flex">
+                    El algoritmo de codificación de Huffman cumple con los siguientes elementos, los cuales caracterizan a una técnica voraz:                </div>
+                <div class="card-board">
+                    <div class="card-item">
+                        <div class="card-title">
+                            Conjunto de candidatos
+                        </div>
+                        <div class="card-content">
+                            Cada uno de los nodos dentro de la cola de prioridad 
+                        </div>
+                    </div>
+
+                    <div class="card-item">
+                        <div class="card-title">
+                            Función solución
+                        </div>
+                        <div class="card-content">
+                            Unión de nodos en un nuevo árbol 
+                        </div>
+                    </div>
+                    
+                    <div class="card-item">
+                        <div class="card-title">
+                            Función de selección
+                        </div>
+                        <div class="card-content">
+                            Selección de nodos con menor frecuencia
+                        </div>
+                    </div>   
+                    
+                    <div class="card-item">
+                        <div class="card-title">
+                            Función de factibilidad
+                        </div>
+                        <div class="card-content">
+                            La cola de prioridad debe de tener mas de un elemento
+                        </div>
+                    </div>  
+                    
+                    <div class="card-item">
+                        <div class="card-title">
+                            Función objetivo
+                        </div>
+                        <div class="card-content">
+                            Árbol de codificación óptimo
+                        </div>
+                    </div>  
+
+                </div>
+            </section>            
 
             <v-main class="lighten-2">
                 <v-container>
