@@ -57,12 +57,12 @@
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <span class="hidden-md-and-down">
-                    <v-btn color="black" text href="#historia">Historia</v-btn>
-                    <v-btn color="black" text href="#funcionamiento">Funcionamiento</v-btn>
-                    <v-btn color="black" text href="#algorithm-box">Algoritmo</v-btn>
-                    <v-btn color="black" text href="#greedy">Greedy</v-btn>
-                    <v-btn color="black" text href="#visualizador-huffman">Animación</v-btn>
-                    <v-btn color="black" text href="#usos">Usos</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#historia')">Historia</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#funcionamiento')">Funcionamiento</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#algorithm-box')">Algoritmo</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#greedy')">Greedy</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#visualizador-huffman')">Animación</v-btn>
+                    <v-btn color="black" rounded text @click="$vuetify.goTo('#usos')">Usos</v-btn>
                 </span>
 
 
@@ -71,22 +71,22 @@
             <v-navigation-drawer v-model="drawer" fixed temporary>
                 <v-list nav dense>
                     <v-list-item-group v-model="group" active-class="primary--text text--primary-4">
-                        <v-list-item href="#historia">
+                        <v-list-item @click="$vuetify.goTo('#historia')">
                             <v-list-item-title>Historia</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#funcionamiento">
+                        <v-list-item @click="$vuetify.goTo('#funcionamiento')">
                             <v-list-item-title>Funcionamiento</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#algorithm-box">
+                        <v-list-item @click="$vuetify.goTo('#algorithm-box')">
                             <v-list-item-title>Algoritmo</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#greedy">
+                        <v-list-item @click="$vuetify.goTo('#greedy')">
                             <v-list-item-title>Greedy</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#visualizador-huffman">
+                        <v-list-item @click="$vuetify.goTo('#visualizador-huffman')">
                             <v-list-item-title>Animación</v-list-item-title>
                         </v-list-item>
-                        <v-list-item href="#usos">
+                        <v-list-item text @click="$vuetify.goTo('#usos')">
                             <v-list-item-title>Usos</v-list-item-title>
                         </v-list-item>
                     </v-list-item-group>
@@ -272,6 +272,25 @@
                     </div>
                 </div>
             </section>
+            <v-footer color="primary " padless>
+                <v-row justify="center" no-gutters align="center">
+                    <v-col class="py-4 px-5 text-center white--text" cols="6">
+                        <strong>Proyecto Final - Análisis de algoritmos</strong><br>
+                        <strong>3CM12</strong>
+                    </v-col>
+                    <v-col class="py-4 white--text text-center" cols="6">
+                        <strong>Integrantes del equipo:</strong><br>
+                        <span>Aguirre Alvarez Omar</span><br>
+                        <span>Álvarez Méndez Laura</span><br>
+                        <span>Bello Muñoz Edgar Alejandro</span><br>
+                        <span>Bolaños Ramos Caleb Salomón</span><br>
+                    </v-col>
+
+                    <v-col class="secondary py-4 text-center white--text" cols="12">
+                        {{ new Date().getFullYear() }} — <strong>ESCOM IPN</strong>
+                    </v-col>
+                </v-row>
+            </v-footer>
         </v-app>
     </div>
 
