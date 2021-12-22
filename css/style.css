@@ -175,6 +175,10 @@ h2{
     max-height: 40vh;
 }
 
+#problema-img{
+    max-width: 30%;
+}
+
 @media screen and (max-width: 640px) {
     .section-information .section-text-img {
         width: 100%;
@@ -190,6 +194,9 @@ h2{
         padding: 10px;
         display: block;
     }    
+    #problema-img{
+        max-width: 80%;
+    }
 }
 @media screen and (max-width: 480px) {
     .section-information.section{
@@ -277,14 +284,50 @@ h2{
 }
 
 .information-msg{
-    
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    text-align: left;
+    padding: 10px;
+    padding-left: 40px;
+
+    width: 50%;
+    border-radius: 8px;
+
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: rgb(207, 207, 207) !important;   
+    position: relative; 
+    overflow: hidden;
+}
+.information-msg::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 15px;
+    background-color: rgb(2, 69, 122);
+    top: 0;
+    left: 0;
 }
 
+.information-msg span{
+    font-weight: bold;
+    color: var(--regal_blue);
+}
+
+@media screen and (max-width: 768px) {
+    .information-msg{
+        width: 80%;
+    }
+}
 @media screen and (max-width: 480px) {
     .algorithm-steps {
         max-width: 80%;
         margin: auto;
     }  
+    .information-msg{
+        width: 100%;
+    }    
 }
 
 /* ----------------- Sección Greedy ----------------- */
