@@ -46,62 +46,39 @@
 <body>
     <div id="app">
         <v-app>
-            <v-app-bar absolute elevate-on-scroll class="no-sticky" id="navbar">
+            <!-- <v-app-bar absolute elevate-on-scroll class="no-sticky" id="navbar">
+                <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
+            </v-app-bar> -->
+            <v-app-bar app style=" background-color: rgba(255, 255, 255, 0.5) !important; backdrop-filter: saturate(180%) blur(20px) !important;" elevate-on-scroll>
+
+                <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <span class="nav-items">
-                   <a class="" href="#historia">Historia</a>
-                   <a class="" href="#funcionamiento">Funcionamiento</a>
-                   <a class="" href="#algorithm-box">Algoritmo</a>
-                   <a class="" href="#greedy">Greedy</a>
-                   <a class="" href="#usos">Usos</a>
-                   <a class="" href="#visualizador-huffman">Animación</a>
-                </span>
+                <v-btn color="black" text href="#">Botones</v-btn>
+                <v-btn color="black" text href="#">Botones</v-btn>
+
             </v-app-bar>
 
-                <v-card
-                  class="mx-auto overflow-hidden"
-                  height="400"
-                >
-                  <v-app-bar
-                    color="deep-purple"
-                    dark
-                  >
-                    <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-              
-                    <v-toolbar-title>Title</v-toolbar-title>
-                  </v-app-bar>
-              
-                  <v-navigation-drawer
-                    v-model="drawer"
-                    absolute
-                    temporary
-                  >
-                    <v-list
-                      nav
-                      dense
-                    >
-                      <v-list-item-group
-                        v-model="group"
-                        active-class="deep-purple--text text--accent-4"
-                      >
-                        <v-list-item>
-                          <v-list-item-icon>
-                            <v-icon>mdi-home</v-icon>
-                          </v-list-item-icon>
-                          <v-list-item-title>Home</v-list-item-title>
+            <v-navigation-drawer v-model="drawer" fixed temporary>
+                <v-list nav dense>
+                    <v-list-item-group v-model="group" active-class="accent--text text--accent-4">
+                        <v-list-item href="#">
+                            <v-list-item-icon>
+                                <v-icon>mdi-home</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-title>Item 1</v-list-item-title>
                         </v-list-item>
-              
-                        <v-list-item>
-                          <v-list-item-icon>
-                            <v-icon>mdi-account</v-icon>
-                          </v-list-item-icon>
-                          <v-list-item-title>Account</v-list-item-title>
+
+                        <v-list-item href="#">
+                            <v-list-item-icon>
+                                <v-icon>mdi-clipboard-list</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-title>Item 2</v-list-item-title>
                         </v-list-item>
-                      </v-list-item-group>
-                    </v-list>
-                  </v-navigation-drawer>
-                </v-card>
+                    </v-list-item-group>
+                </v-list>
+            </v-navigation-drawer>
+
 
             <!-- Banner superior -->
             <section class="banner" data-aos="fade-up" data-aos-duration="700">
@@ -135,9 +112,8 @@
                 <h2>¿Qué es el algoritmo de Huffman?</h2>
                 <div class="section-text-img">
                     <div class="text-info">
-                        La codificación de Huffman es una técnica para la <b>compresión de datos</b> mediante el estudio de la frecuencia de aparición de caracteres, 
-                        la cual es ampliamente usada y muy efectiva. Fue desarrollado por el norteamericano David Albert Huffman en 1952 mientras hacía el doctorado
-                        en el MIT. El método fue publicado en una revista como “A Method for the Construction of Minimum-Redundancy Codes” el cual puedes  
+                        La codificación de Huffman es una técnica para la <b>compresión de datos</b> mediante el estudio de la frecuencia de aparición de caracteres, la cual es ampliamente usada y muy efectiva. Fue desarrollado por el norteamericano David
+                        Albert Huffman en 1952 mientras hacía el doctorado en el MIT. El método fue publicado en una revista como “A Method for the Construction of Minimum-Redundancy Codes” el cual puedes
                         <a href="http://compression.ru/download/articles/huff/huffman_1952_minimum-redundancy-codes.pdf" target="_blank">consultar aquí</a>.
                     </div>
                     <img src="./Assets/Images/Huffman.jpg" alt="Huffman.jpg" class="img-info" id="huffman-img" title="David Albert Huffman">
@@ -151,19 +127,17 @@
                     <img src="./Assets/Images/Problema.png" alt="Problema.png" class="img-info" id="problema-img" title="¿Cómo funciona el algoritmo de Huffman?">
                     <div class="text-info">
                         <p>
-                        Huffman inventó un <b>algoritmo voraz</b> que construye un árbol de codificación optima, del cual, se obtiene la codificación optima de un mensaje dado. 
-                        El algoritmo funciona a partir de un alfabeto de n símbolos, junto con sus frecuencias de aparición asociadas y produce un código de Huffman para
-                        esas frecuencias y alfabeto.
+                            Huffman inventó un <b>algoritmo voraz</b> que construye un árbol de codificación optima, del cual, se obtiene la codificación optima de un mensaje dado. El algoritmo funciona a partir de un alfabeto de n símbolos, junto con
+                            sus frecuencias de aparición asociadas y produce un código de Huffman para esas frecuencias y alfabeto.
                         </p>
 
                         <p>
-                        El algoritmo consiste en la creación de un árbol binario que tiene cada uno de los símbolos por hoja, y construido de tal forma que, 
-                        siguiéndolo desde la raíz a cada una de sus hojas se obtiene el código Huffman asociado. 
-                        </p>                       
+                            El algoritmo consiste en la creación de un árbol binario que tiene cada uno de los símbolos por hoja, y construido de tal forma que, siguiéndolo desde la raíz a cada una de sus hojas se obtiene el código Huffman asociado.
+                        </p>
                     </div>
                 </div>
-            </section>           
-            
+            </section>
+
             <!-- Pasos del algoritmo -->
             <section class="section-information section" data-aos="fade-up" data-aos-duration="700" id="algorithm-box">
                 <h2 data-aos="fade-up" data-aos-duration="700">Pasos del algoritmo</h2>
@@ -186,7 +160,7 @@
                 <h3 data-aos="fade-up" data-aos-duration="700">Para obtener los códigos óptimos por cada carácter del alfabeto:</h3>
                 <div class="algorithm-steps" data-aos="fade-up" data-aos-duration="700">
                     <p>
-                        Iniciar siempre el recorrido en el árbol formado a partir de la raíz. Tener una matriz auxiliar. 
+                        Iniciar siempre el recorrido en el árbol formado a partir de la raíz. Tener una matriz auxiliar.
                     </p>
                     <p>
                         Mientras nos movemos a la izquierda escribir 0.
@@ -197,26 +171,26 @@
                     <p>
                         Si llegamos a una hoja imprima la matriz.
                     </p>
-                </div>  
-                
+                </div>
+
                 <div class="information-msg" data-aos="fade-up" data-aos-duration="700">
                     <h4>Complejidad</h4>
                     <p>Este algoritmo tiene una complejidad de <span>O(nlog(n))</span></p>
                 </div>
-            </section>               
+            </section>
 
             <!-- CODIFICACIÓN VORAZ/GREEDY -->
             <section class="section-information" data-aos="fade-up" data-aos-duration="700" id="greedy">
                 <h2>¿Por qué es un algoritmo voraz (Greedy)?</h2>
                 <div class="container flex">
-                    El algoritmo de codificación de Huffman cumple con los siguientes elementos, los cuales caracterizan a una técnica voraz:                </div>
+                    El algoritmo de codificación de Huffman cumple con los siguientes elementos, los cuales caracterizan a una técnica voraz: </div>
                 <div class="card-board">
                     <div class="card-item">
                         <div class="card-title">
                             Conjunto de candidatos
                         </div>
                         <div class="card-content">
-                            Cada uno de los nodos dentro de la cola de prioridad 
+                            Cada uno de los nodos dentro de la cola de prioridad
                         </div>
                     </div>
 
@@ -225,10 +199,10 @@
                             Función solución
                         </div>
                         <div class="card-content">
-                            Unión de nodos en un nuevo árbol 
+                            Unión de nodos en un nuevo árbol
                         </div>
                     </div>
-                    
+
                     <div class="card-item">
                         <div class="card-title">
                             Función de selección
@@ -236,8 +210,8 @@
                         <div class="card-content">
                             Selección de nodos con menor frecuencia
                         </div>
-                    </div>   
-                    
+                    </div>
+
                     <div class="card-item">
                         <div class="card-title">
                             Función de factibilidad
@@ -245,8 +219,8 @@
                         <div class="card-content">
                             La cola de prioridad debe de tener mas de un elemento
                         </div>
-                    </div>  
-                    
+                    </div>
+
                     <div class="card-item">
                         <div class="card-title">
                             Función objetivo
@@ -254,11 +228,11 @@
                         <div class="card-content">
                             Árbol de codificación óptimo
                         </div>
-                    </div>  
+                    </div>
 
                 </div>
-            </section>   
-            
+            </section>
+
             <!-- ¿Para que sirve este algoritmo? -->
             <section class="section-information section" data-aos="fade-up" data-aos-duration="700" id="usos">
                 <h2>¿Para que sirve este algoritmo?</h2>
@@ -266,12 +240,11 @@
                     <img src="./Assets/Images/png.png" alt="PNG.png" class="img-info" id="PNG-img" title="¿Para que sirve este algoritmo?">
                     <div class="text-info">
                         <p>
-                            El algoritmo de codificación de Huffman se usa ampliamente en todos los formatos de compresión convencionales que puede encontrarse, 
-                            desde GZIP, PKZIP (winzip, etc.) y BZIP2, hasta formatos de imagen como JPEG y PNG.
-                        </p>                     
+                            El algoritmo de codificación de Huffman se usa ampliamente en todos los formatos de compresión convencionales que puede encontrarse, desde GZIP, PKZIP (winzip, etc.) y BZIP2, hasta formatos de imagen como JPEG y PNG.
+                        </p>
                     </div>
                 </div>
-            </section>                   
+            </section>
 
             <v-main class="lighten-2">
                 <v-container>
@@ -290,6 +263,8 @@
             el: '#app',
             data: () => ({
                 cadena: '',
+                drawer: false,
+                group: null,
             }),
             methods: {},
             computed: {},
