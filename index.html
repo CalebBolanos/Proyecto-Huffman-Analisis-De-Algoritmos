@@ -50,6 +50,50 @@
                 <v-toolbar-title>Codificación de Huffman</v-toolbar-title>
             </v-app-bar>
 
+                <v-card
+                  class="mx-auto overflow-hidden"
+                  height="400"
+                >
+                  <v-app-bar
+                    color="deep-purple"
+                    dark
+                  >
+                    <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+              
+                    <v-toolbar-title>Title</v-toolbar-title>
+                  </v-app-bar>
+              
+                  <v-navigation-drawer
+                    v-model="drawer"
+                    absolute
+                    temporary
+                  >
+                    <v-list
+                      nav
+                      dense
+                    >
+                      <v-list-item-group
+                        v-model="group"
+                        active-class="deep-purple--text text--accent-4"
+                      >
+                        <v-list-item>
+                          <v-list-item-icon>
+                            <v-icon>mdi-home</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-title>Home</v-list-item-title>
+                        </v-list-item>
+              
+                        <v-list-item>
+                          <v-list-item-icon>
+                            <v-icon>mdi-account</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-title>Account</v-list-item-title>
+                        </v-list-item>
+                      </v-list-item-group>
+                    </v-list>
+                  </v-navigation-drawer>
+                </v-card>
+
             <!-- Banner superior -->
             <section class="banner" data-aos="fade-up" data-aos-duration="700">
                 <div class="container flex">
@@ -63,7 +107,7 @@
                                 <a href="#visualizador-huffman" class="v-btn v-btn--has-bg v-size--default animacion_link btn-personal-primary">
                                     Animación
                                 </a>
-                                <a href="#info-box" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
+                                <a href="#algorithm-box" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
                                     Algoritmo
                                 </a>
                             </div>
@@ -112,7 +156,7 @@
             </section>           
             
             <!-- Pasos del algoritmo -->
-            <section class="section-information section" data-aos="fade-up" data-aos-duration="700">
+            <section class="section-information section" data-aos="fade-up" data-aos-duration="700" id="algorithm-box">
                 <h2 data-aos="fade-up" data-aos-duration="700">Pasos del algoritmo</h2>
                 <h3 data-aos="fade-up" data-aos-duration="700">Para obtener el árbol de codificación optimo:</h3>
                 <div class="algorithm-steps" data-aos="fade-up" data-aos-duration="700">
@@ -222,7 +266,7 @@
 
             <v-main class="lighten-2">
                 <v-container>
-                    <v-info></v-info>
+                    <!-- <v-info></v-info> -->
                     <v-row></v-row>
                     <h2 id="visualizador-huffman" class="link-scroll" data-aos="fade-up">Animación de codificación de Huffman</h2>
                     <visualizador-huffman/>

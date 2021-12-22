@@ -33,7 +33,7 @@ window.addEventListener("load", function(){
         console.log(href);
         // console.log(offsetTop);
         scroll({
-          top: y - 110,
+          top: y - 200,
           behavior: "smooth"
         });    
     }
