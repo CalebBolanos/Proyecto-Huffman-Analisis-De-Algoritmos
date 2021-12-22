@@ -132,6 +132,9 @@ html {
 }
 
 /* ----------------- Sección historia del algoritmo ----------------- */
+h2{
+    margin-top: 20px;
+}
 
 .section-information.section {
     width: 70%;
@@ -170,6 +173,36 @@ html {
 
 #huffman-img {
     max-height: 40vh;
+}
+
+@media screen and (max-width: 640px) {
+    .section-information .section-text-img {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }    
+    #huffman-img {
+        margin: auto;
+        display: block;
+    }
+    .section-information .text-info {
+        min-width: 100%;
+        padding: 10px;
+        display: block;
+    }    
+}
+@media screen and (max-width: 480px) {
+    .section-information.section{
+        width: 100%;
+        padding: 12px;
+    }    
+    .section-information .text-info {
+        padding: 0;
+    }  
+    #huffman-img {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }      
 }
 
 /* ----------------- Sección Algorithm Steps ----------------- */
@@ -241,6 +274,13 @@ html {
     font-size: 1.25em;
     border-radius: 50%;
     padding: 10px;
+}
+
+@media screen and (max-width: 480px) {
+    .algorithm-steps {
+        max-width: 80%;
+        margin: auto;
+    }  
 }
 
 /* ----------------- Sección Greedy ----------------- */
