@@ -73,7 +73,7 @@ const VisualizadorHuffman = {
             label="Escribe el mensaje que deseas codificar"
             v-model="cadena"
           ></v-textarea>
-          <v-btn block color="primary" @click="generarNodos()"> Construir árbol </v-btn>
+          <v-btn block color="primary" @click="generarNodos(); $vuetify.goTo('#cy')"> Construir árbol </v-btn>
           
         </v-card-text>
       </v-card>
@@ -479,7 +479,7 @@ while (colaPrioridad.length > 1) {
             this.stringGreedy = "Función objetivo: " + this.elementosGreedy['Funcion objetivo'];
             this.imprimirCodigosEnNodos(colaPrioridad[0], "");
             this.codificarString();
-            console.log(this.codigosSimbolos);
+            //console.log(this.codigosSimbolos);
 
 
 
@@ -704,7 +704,7 @@ while (colaPrioridad.length > 1) {
 
         imprimirCodigosEnNodos(raiz, cadenaCodificacion) {
             if (raiz.izquierda == null && raiz.derecha == null) {
-                console.log(raiz.caracter + ": " + cadenaCodificacion);
+                //console.log(raiz.caracter + ": " + cadenaCodificacion);
                 this.codigosSimbolos[raiz.caracter] = cadenaCodificacion;
                 this.crearPopper(this.cy.getElementById(raiz.idCy), cadenaCodificacion);
                 return;
@@ -744,11 +744,11 @@ while (colaPrioridad.length > 1) {
             this.tamanoMensajeBytes = this.cadena.length;
             this.tamanoCodificadoBytes = this.cadenaCodificadaBits.length / 8;
 
-            console.log('mensaje', this.tamanoMensajeBytes);
-            console.log('codificado', this.tamanoCodificadoBytes);
+            //console.log('mensaje', this.tamanoMensajeBytes);
+            //console.log('codificado', this.tamanoCodificadoBytes);
 
             this.porcentajeCompresion = (this.tamanoCodificadoBytes * 100) / this.tamanoMensajeBytes;
-            console.log('porcentaje', this.porcentajeCompresion);
+            //console.log('porcentaje', this.porcentajeCompresion);
 
             let bytesRegex = this.cadenaCodificadaBits.match(/.{1,8}/g);
             this.cadenaCodificadaBytes = bytesRegex.join(' ');
