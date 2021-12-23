@@ -2,34 +2,32 @@
 <html>
 
 <head>
-    <link href="css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="css/vuetify.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/quicksand.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <script src="https://unpkg.com/cytoscape@3.2.22/dist/cytoscape.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cytoscape-automove@1.10.2/cytoscape-automove.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
-    <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
-    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
-    <script src="https://unpkg.com/popper.js@1.14.7/dist/umd/popper.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cytoscape-popper@1.0.4/cytoscape-popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@4.0.1/umd/index.all.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/tippy.js@4.0.1/index.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <script src="librerias/vue.js"></script>
-    <script src="librerias/vuetify.js"></script>
-
+    <script src="Assets/js/cytoscape.min.js"></script>
+    <script src="Assets/js/cytoscape-automove.min.js"></script>
+    <script src="Assets/js/ace.js"></script>
+    <script src="Assets/js/dagre.min.js"></script>
+    <script src="Assets/js/cytoscape-dagre.js"></script>
+    <script src="Assets/js/popper.js"></script>
+    <script src="Assets/js/cytoscape-popper.min.js"></script>
+    <script src="Assets/js/tippy.index.all.min.js"></script>
+    <script src="Assets/js/aos.js"></script>
+    <script src="Assets/js/filesaver.js"></script>
+    <script src="Assets/js/vue@2.6.14.js"></script>
+    <script src="Assets/js/vuetify.js"></script>
     <script src="componentes/VisualizadorHuffman.js"></script>
     <script src="componentes/info.js"></script>
 
     <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/quicksand.css" />
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/algorithm-steps.scss">
+    <link href="css/vuetify.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/typpy.index.css" />
+    <link href="css/aos.css" rel="stylesheet">
+
+
     <style>
         .v-application {
             font-family: "Quicksand";
@@ -103,10 +101,10 @@
                                 Bienvenido a la presentación de nuestro proyecto final para la unidad de aprendizaje de Análisis de Algoritmos. En esta página encontrarás información acerca del algoritmo de Huffman y podrás conocer su funcionamiento a través de una interactiva animación.
                             </p>
                             <div class="buttons">
-                                <a href="#visualizador-huffman" class="v-btn v-btn--has-bg v-size--default animacion_link btn-personal-primary">
+                                <a @click="$vuetify.goTo('#visualizador-huffman')" class="v-btn v-btn--has-bg v-size--default animacion_link btn-personal-primary">
                         Animación
                     </a>
-                                <a href="#algorithm-box" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
+                                <a @click="$vuetify.goTo('#algorithm-box')" class="v-btn v-btn--outlined theme--light v-size--default animacion_link">
                         Algoritmo
                     </a>
                             </div>
